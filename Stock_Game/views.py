@@ -83,4 +83,5 @@ def stockers(request,stock):
     param={'stock_name':quote['companyName'],'Stock_price':quote['buyPrice1']}
     return render(request, 'Stock_Game/stocker.html',param)
 
-
+def stock_details(request):
+    return render(request, 'Stock_Game/stock_details.html')
