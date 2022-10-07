@@ -1,0 +1,45 @@
+{% extends 'User/base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'User/css/blog_list.css' %}?{% now "U" %}">
+{% endblock css %}
+
+
+{% block content %}
+
+
+
+
+<div class="outer">
+    <div class="inner">
+
+        <br>
+        {% for c in b %}
+            {% if c.blog.all %}
+            <div class="container justify-content-center text-center">
+                <h1 class="">{{ c.consultant_id.user.username }}</h1>
+                <hr>
+            </div>
+            {% for post in c.blog.all %}
+                <div class="card container" id="thumbs" data-related="{{ post.id }}" style="width: 100%;">
+                    <div class="card-body">
+                        <div style="display: flex;">
+                            <h3 class="card-title">{{ post.title }}</h3>
+                            <span class="text-muted" style="margin-left: auto; font-style: italic;">By- {{ post.author }}</span>
+                        </div>
+                        <p class="card-text">{{ post.blogs|safe }} </p>
+                        <!-- <div class="container">
+                            <button class="btn btn-primary com addcomm" id="{{ post.id }}" data-com="{{ post.id }}" onclick="start(this.id);" style="">Comments</button>
+                        </div> -->
+                    </div>
+                </div>
+            {% endfor %}
+            {% endif %}
+        {% endfor %}      
+    </div>
+</div>
+{% endblock %}
+
+

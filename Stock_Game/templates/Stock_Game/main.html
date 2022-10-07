@@ -110,8 +110,8 @@
   <body>
   <main>
 	    <div class="container px-4 py-5" id="custom-cards">
-    <h2 class="pb-2 border-bottom" style="color:white">Welcome, Himanshu Mishra</h2>
-
+    <h2 class="pb-2 border-bottom" style="color:white">Welcome, {{ request.user.username }}</h2>
+    <a href="{% url 'create-blog' %}" class="btn btn-info">Create Blog</a>
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
       <div class="col">
         <div class="card card-cover h-100 overflow-hidden text-bg-light rounded-4 shadow-lg">
@@ -131,8 +131,8 @@
           <div class="d-flex flex-column h-100 p-5 pb-3 text-black text-shadow-1">
 			 <center> <h2>Your Subscriptions</h2></center>
 			  <div> Hello<span style="margin: 70px 150px 100px 100px;"><button class="btn-primary" style="left-margin:40px;right-margin:0px!important">View Details</button></span></div>
-            <span><a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:5px;margin:20px">View Blog</a>
-            <a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:5px;">Add Subscription</a></span></div>
+            <span><a class="btn btn-lg btn-primary" href="{% url 'blog_list' %}" style="background-color:#3F00FF;padding:5px;margin:20px">View Blog</a>
+            <a class="btn btn-lg btn-primary" href="{% url 'subscribe' %}" style="background-color:#3F00FF;padding:5px;">Add Subscription</a></span></div>
         </div>
       </div>
 

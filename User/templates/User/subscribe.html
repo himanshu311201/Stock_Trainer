@@ -1,0 +1,53 @@
+{% extends 'User/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'User/css/subscriber.css' %}?{% now "U" %}">
+{% endblock css %}
+{% block content %}
+<!-- partial:index.partial.html -->
+
+<!-- partial -->
+<div class="container-fluid justify-content-center text-center" style="background-color:rgba(0,0,0,0.5)">
+    <div class="row justify-content-center">
+            <h1 class="justify-content-center h1" style="padding-top: 9%; padding-bottom: 9%; font-size: 100px; color:white;font-style: italic;">Our Authors</h1>
+    </div>
+</div>
+<hr>
+<div class="container-fluid" style="width: 100%; overflow-x:scroll">
+    <div class="row flex-row flex-nowrap " style="width:100%;">
+        {% for u in c %}
+            <div class="col-3">
+                <div class="card" style="width: 18rem;margin-right: 2%;">
+                    <img class="card-img-top" src="/media/{{ u.consultant_id.image_field }}" alt="Card image cap" style="width: 100%;
+                    height: 15vw;
+                    object-fit: cover;">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ u.consultant_id.user.username }}</h5>
+                    <p class="card-text">{{ u.consultant_id.about_me }}</p>
+                    <a href="#" class="btn btn-primary">Subscribe</a>
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+    </div>
+</div>
+<!-- <div class="container-fluid horizontal-scrollable justify-content-center">
+    <div class="container-fluid py-2">
+        <div class="row">
+            {% for u in c %}
+            <div class="card" style="width: 18rem;margin-right: 2%;">
+                <img class="card-img-top" src="/media/{{ u.consultant_id.image_field }}" alt="Card image cap" style="width: 100%;
+                height: 15vw;
+                object-fit: cover;">
+                <div class="card-body">
+                <h5 class="card-title">{{ u.consultant_id.user.username }}</h5>
+                <p class="card-text">{{ u.consultant_id.about_me }}</p>
+                <a href="#" class="btn btn-primary">Subscribe</a>
+                </div>
+            </div>
+          {% endfor %}
+        </div>
+    </div>
+   
+</div> -->
+{% endblock content %}

@@ -1,0 +1,93 @@
+{% extends 'User/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'User/css/register.css' %}?{% now "U" %}">
+{% endblock css %}
+{% block content %}
+<div class="container">
+    <!-- Just Checking -->
+    <div class="row top no-gutters justify-content-center">
+        <div class="col-lg-5 col-sm-12 super">
+            <div class="col-lg-12 below-right no-gutters">
+            </div>
+            <div class="col-lg-12 cover-right no-gutters">
+            </div>
+        </div>
+        <div class="col-lg-5 left">
+            <div class="container-left container col-lg-12 col-sm-12">
+                <div class="container col-lg-10">
+                    <div class="row register-heading">
+                        <h3>Register</h3>
+                    </div>
+                    <div class="row top-left side-row ">
+                        <form method="POST" enctype="multipart/form-data">                            
+                        
+                                {% csrf_token %}   
+                                <div class="form-group">
+                                <div class="fieldWrapper">
+                                    <label for="{{ user.username.id_for_label }}" class="down">Username</label>
+                                    {{ user.username }}
+                                </div>
+                                {{ user.username.errors }}
+                                <div class="fieldWrapper">
+                                        <label for="{{ user.email.id_for_label }}" class="down">Email</label>
+                                        {{ user.email }}
+                                </div>
+                                <div class="fieldWrapper">
+                                    <label for="{{ user.password1.id_for_label }}" class="down">Password</label>
+                                    {{ user.password1 }}
+                                </div>
+                                {{ user.password1.errors }}
+                                <div class="fieldWrapper">
+                                    <label for="{{ user.password2.id_for_label }}"class="down">Confirm Password</label>
+                                    {{ user.password2 }}
+                                </div>
+                                {{ user.password2.errors }}
+                                <div class="fieldWrapper">
+                                    <label for="{{ register.bank_acc_no.id_for_label }}"class="down">Profile photo</label>
+                                    <br>
+                                    <br>
+                                    {{ register.image_field }}
+                                </div>
+                                <!-- <br> -->
+                                <!-- {{ register. }}
+                                <div class="fieldWrapper hidden">
+                                    <label for="{{ register.ifsc.id_for_label }}"class="down">IFSC</label>
+                                    {{ register.ifsc }}
+                                </div>
+                                {{ register.ifsc.errors }}
+                                <div class="fieldWrapper hidden">
+                                    <label for="{{ register.address.id_for_label }}"class="down">Address</label>
+                                    {{ register.address }}
+                                </div>
+                                 {{ register.address.errors }}-->
+                                <div class="fieldWrapper">
+                                    <br>
+                                    <label for="{{ register.consultant.id_for_label }}" style="font-weight: bold;">Want to be a Consultant?</label>&nbsp
+                                    {{ register.consultant }}
+                                </div>
+                                <div class="fieldWrapper ab ">
+                                    <br>
+                                    <label for="{{ register.about_me.id_for_label }}" style="font-weight: bold;">About You</label>&nbsp
+                                    {{ register.about_me }}
+                                </div>
+                                <br>
+                                <!-- <div class="fieldWrapper hidden">
+                                    <p class="text-muted" style="font-weight: bold;">By clicking on below button, you agree with our <a href='#'>Terms and Conditions</a></p>
+                                </div>-->
+                                <button class="btn btn-info" type="submit">Submit</button>
+                                <br>
+                                </div>
+                                <br>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+{% endblock %}
+<!-- {% block js %} -->
+<script src="{% static 'User/js/register.js' %}?{% now "U" %}"></script>
+<!-- {% endblock js %} -->
