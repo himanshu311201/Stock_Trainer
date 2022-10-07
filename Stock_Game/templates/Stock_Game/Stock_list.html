@@ -110,54 +110,31 @@
   <body>
   <main>
 	    <div class="container px-4" id="custom-cards">
-    <h2 class="pb-2 border-bottom" style="color:white">Team: GLOBAL</h2>
+            <center>
+    <h2 class="pb-2 border-bottom" style="color:white">Stocks</h2>
+                </center>
 
     <div class="row row-cols-1 row-cols-lg-1 align-items-stretch g-4 ">
       <div class="col">
         <div class="card card-cover h-100 overflow-hidden text-bg-light rounded-4 shadow-lg">
           <div class="d-flex flex-column h-100 p-5 pb-1 text-black text-shadow-1">
-            <h4> Total Profit: 1200</h4>
-            <h4>Money available:10000</h4>
-            <h4>Initial fund: 15000</h4>
-            <br>
-            <h2>Portfolio</h2>
-
-              <div class="row">
+{% for i in k %}
+    <div class="row">
               <div class="col">
-                <h4>Reliance</h4>
-                <h6>Profit:500</h6>
-                <h6>Invested Price: 2340</h6>
-                <h6>Current Price: 2350</h6>
-                <h6>Qty:50</h6>
+                <h4>{{i.name}}</h4>
+                <h6>Current Price:{{i.Price}}</h6>
               </div>
               <div class="col">
 
               </div>
               <div class="col">
-                <span><a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;margin:10px">Add</a>
-                  <a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;">Sell</a></span>
+                <span><a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;margin:10px">View Details</a>
+                  </span>
               </div>
             </div>
-            <div class="row">
-              <div class="col">
-                <h4>Reliance</h4>
-                <h6>Profit:500</h6>
-                <h6>Invested Price: 2340</h6>
-                <h6>Current Price: 2350</h6>
-                <h6>Qty:50</h6>
-              </div>
-              <div class="col">
-
-              </div>
-              <div class="col">
-                <span><a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:5px;margin:10px">Add</a>
-                  <a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:5px;">Sell</a></span>
-              </div>
-            </div>
+    {% endfor %}
           </div>
+        </div></div>
+    </div></div>
         </div>
-      </div>
-    </div>
-  </div>
-
   </main>

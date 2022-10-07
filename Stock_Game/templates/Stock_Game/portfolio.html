@@ -116,19 +116,33 @@
       <div class="col">
         <div class="card card-cover h-100 overflow-hidden text-bg-light rounded-4 shadow-lg">
           <div class="d-flex flex-column h-100 p-5 pb-1 text-black text-shadow-1">
-            <h4> Total Profit: 1200</h4>
-            <h4>Money available:10000</h4>
-            <h4>Initial fund: 15000</h4>
+            <h4> Total Profit: {{Profit}}</h4>
+            <h4>Money available:{{money_left}}</h4>
+            <h4>Initial fund:{{Initial}} </h4>
             <br>
             <h2>Portfolio</h2>
-
+            {% for i in k %}
               <div class="row">
               <div class="col">
-                <h4>Reliance</h4>
-                <h6>Profit:500</h6>
-                <h6>Invested Price: 2340</h6>
-                <h6>Current Price: 2350</h6>
-                <h6>Qty:50</h6>
+                <h4>{{i.stock_name}}</h4>
+                <script>
+                  document.getElementById("profit").style.color = "blue";
+                  if(document.getElementById('money_inv').value>document.getElementById('curr_money').value){
+                    document.getElementById('profit').style.Color = '#5bc556';
+                      console.log('Green');
+                  }
+                  else {
+                       document.getElementById('profit').style.Color = '#5bc556';
+                       console.log('REd');
+                  }
+              </script>
+                <h6 >Profit/Loss:<span id="profit>">{{i.profit}}</span></h6>
+                <script>
+                  document.getElementById("profit").style.color = "blue";
+                  </script>
+                <h6 id="money_inv">Invested Price:{{i.old_price}}</h6>
+                <h6 id="curr_money">Current Price: {{i.Current_price}}</h6>
+                <h6 id="qty">Qty:{{i.no_of_shares}}</h6>
               </div>
               <div class="col">
 
@@ -138,22 +152,7 @@
                   <a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;">Sell</a></span>
               </div>
             </div>
-            <div class="row">
-              <div class="col">
-                <h4>Reliance</h4>
-                <h6>Profit:500</h6>
-                <h6>Invested Price: 2340</h6>
-                <h6>Current Price: 2350</h6>
-                <h6>Qty:50</h6>
-              </div>
-              <div class="col">
-
-              </div>
-              <div class="col">
-                <span><a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:5px;margin:10px">Add</a>
-                  <a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:5px;">Sell</a></span>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
