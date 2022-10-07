@@ -8,6 +8,5 @@ urlpatterns = [
     path('portfolio/<team_name>/',views.portfolio,name="stocks"),
     path('ranklist/<team_name>/',views.ranklist,name="stocks"),
     path('stockname/<stock>/',views.stockers,name="stockname"),
-    path('stock_details/', views.stock_details, name='stock_details')
-
+    path('stock_details/', views.stock_details, name='stock_details'),
 ]
