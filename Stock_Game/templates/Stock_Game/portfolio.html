@@ -110,7 +110,7 @@
   <body>
   <main>
 	    <div class="container px-4" id="custom-cards">
-    <h2 class="pb-2 border-bottom" style="color:white">Team: GLOBAL</h2>
+    <h2 class="pb-2 border-bottom" style="color:white">Team: {{name}}</h2>
 
     <div class="row row-cols-1 row-cols-lg-1 align-items-stretch g-4 ">
       <div class="col">
@@ -120,7 +120,14 @@
             <h4>Money available:{{money_left}}</h4>
             <h4>Initial fund:{{Initial}} </h4>
             <br>
-            <h2>Portfolio</h2>
+            <center>
+              <a class="btn btn-lg btn-primary"  style="background-color:#3F00FF;padding:6px;margin: 8px;" href="/ranklist/{{id}}/">View Ranklist</a>
+              <a class="btn btn-lg btn-primary" href="/stocks/{{id}}/" style="background-color:#3F00FF;padding:6px;">Add stocks</a>
+              <br>
+              <br>
+              <b><h2 style="text-decoration: underline;
+  text-decoration-thickness: auto; ">Portfolio</h2></b>
+              </center>
             {% for i in k %}
               <div class="row">
               <div class="col">
