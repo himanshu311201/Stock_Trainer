@@ -1,0 +1,60 @@
+body {
+    background-color: rgb(219, 217, 217);
+    align-self: center;
+    align-content: center;
+    align-items: center;
+  }
+  .outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: max-content;
+    background-color: rgb(219, 217, 217);
+    align-items: center;
+    align-content: center;
+  }
+  
+  .card {
+    margin-bottom: 1%;
+    box-shadow: 10px 5px 10px black;
+  }
+  
+  .inner {
+    width: 50%;
+    padding: 0;
+  }
+  
+  .post {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2%;
+    margin-right: 2%;
+    border: 1px solid black;
+  }
+  
+  img {
+    display: flex;
+    width: 80% !important;
+    height: auto !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* .active {
+    height: 100px;
+    width: 100px;
+  } */
+  
+  .inactive {
+    display: none;
+    opacity: 0;
+  }
+  
+  .content-section {
+    background-color: white;
+  }
+  
+  .form2 {
+    background-color: blue;
+  }

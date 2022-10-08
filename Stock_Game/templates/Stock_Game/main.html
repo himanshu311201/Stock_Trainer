@@ -110,8 +110,13 @@
   <body>
   <main>
 	    <div class="container px-4 py-5" id="custom-cards">
+<<<<<<< HEAD
+    <h2 class="pb-2 border-bottom" style="color:white">Welcome, {{ request.user.username }}</h2>
+    <a href="{% url 'create-blog' %}" class="btn btn-info">Create Blog</a>
+=======
     <h2 class="pb-2 border-bottom" style="color:white">Welcome, {{request.user}}</h2>
 
+>>>>>>> 31dd89ef92b8c5951bfee88bc99d1407b3506ef3
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
       <div class="col">
         <div class="card card-cover h-100 overflow-hidden text-bg-light rounded-4 shadow-lg">
@@ -174,8 +179,8 @@
   </tbody>
 </table>
                   </center>
-            <span><a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:5px;margin:20px">View Blog</a>
-            <a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:5px;">Add Subscription</a></span></div>
+            <span><a class="btn btn-lg btn-primary" href="{% url 'blog_list' %}" style="background-color:#3F00FF;padding:5px;margin:20px">View Blog</a>
+            <a class="btn btn-lg btn-primary" href="{% url 'subscribe' %}" style="background-color:#3F00FF;padding:5px;">Add Subscription</a></span></div>
         </div>
       </div>
 
