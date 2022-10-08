@@ -7,6 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView,ListView
 from .forms import CreateBlogs
 from .models import Blogs
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -46,14 +48,16 @@ def register(request):
 
 
 
-
+@login_required
 def subscribe(request):
     c=Consultant.objects.all()
     return render(request,'User/subscribe.html',{'c':c})
 
-
+@login_required
 def blog_list(request):
     b=Consultant.objects.all()
+    c=True
+    print(b)
     return render(request,'User/blog_list.html',{'b':b})
 
 
