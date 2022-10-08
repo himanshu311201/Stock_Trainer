@@ -1,17 +1,89 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from nsetools import Nse
+import ast
 from operator import itemgetter
 from .models import Stock,Buy,Room, Join
-from User.models import Profile
-
+from User.models import Profile,Subscribe,Consultant
+from .forms import CreateForm
 # creating a Nse object
 nse = Nse()
-
-# getting quote of the sbin
-quote = nse.get_quote('hdfc')
+def Create_team(request):
+    print("GO to hell")
+    if request.method == 'POST':
+        print("GO to hell")
+        form = CreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            Profile1 = Profile.objects.filter(user=request.user)
+            p = form.save(commit=False)
+            print("marja")
+            p.reg_user=Profile1[0]
+            p.save()
+            print("Hell")
+            post = Join()
+            post.reg_user_id=Profile1[0]
+            pol=Room.objects.get(id=(p.pk))
+            post.room=pol
+            post.user_money=pol.room_money
+            post.save()
+            return redirect('show',p.pk)
+        else:
+            print(form.errors)
+            print("Cutie")
+            return render(request, 'Stock_Game/form.html', {'form': form})
+    else:
+        form = CreateForm()
+        print("Bhaadme jaa")
+        return render(request, 'Stock_Game/form.html', {'form': CreateForm})
+def shownum(request,team_hel):
+    param={'hex':hex(int(team_hel))}
+    return render(request,'Stock_Game/show.html',param)
+def join(request):
+    if request.method == 'POST':
+        if request.POST.get('content'):
+            post = Join()
+            Profile1 = Profile.objects.filter(user=request.user)
+            post.reg_user_id = Profile1[0]
+            k=ast.literal_eval(request.POST.get('content'))
+            print(k)
+            pol = Room.objects.get(id=k)
+            post.room = pol
+            post.user_money = pol.room_money
+            post.save()
+            return redirect('home')
+    return redirect('home')
 def index(request):
-    return render(request, 'Stock_Game/main.html')
-def stocks_list(request):
+    room1 = Room.objects.filter(id=1)
+    for i in room1:
+        k1 = i
+    init = room1[0].room_money
+    teams = Join.objects.filter(room=k1)
+    nse = Nse()
+    Profile1 = Profile.objects.filter(user=request.user)
+    room2 = Join.objects.filter(reg_user_id=Profile1[0])
+    subs=Subscribe.objects.filter(reg_user=Profile1[0])
+    buy2 = Buy.objects.filter(reg_user_id=Profile1[0]).filter(reg_room_id=1)
+    sum1=teams[0].user_money
+    sum2 = teams[0].user_money
+    for j in buy2:
+        quote = nse.get_quote(j.reg_stock_id.nse_code)
+        sum1 += (quote['buyPrice1'] * j.no_of_shares)
+    k3 = 1
+    for i in teams:
+        p = []
+        p.append(i.reg_user_id.user.username)
+        buy1 = Buy.objects.filter(reg_user_id=i.reg_user_id).filter(reg_room_id=i.room)
+        sum = i.user_money
+        k2 = -99999;
+        for j in buy1:
+            print(j.reg_stock_id)
+            quote = nse.get_quote(j.reg_stock_id.nse_code)
+            print(quote['buyPrice1'])
+            sum += (quote['buyPrice1'] * j.no_of_shares)
+        if sum>sum1:
+            k3+=1
+    param={'rank':k3,'avail':sum2,'profit':(sum1-init),'room':room2,'subs':subs}
+    return render(request, 'Stock_Game/main.html',param)
+def stocks_list(request,team_name):
     nse = Nse()
     stocks=Stock.objects.all()
     print(stocks)
@@ -35,27 +107,42 @@ def ranklist(request,team_name):
     nse = Nse()
     for i in teams:
         p=[]
-        p.append(i.reg_user_id)
+        p.append(i.reg_user_id.user.username)
         buy1=Buy.objects.filter(reg_user_id=i.reg_user_id).filter(reg_room_id=i.room)
         sum=i.user_money
+        k2=-99999;
         for j in buy1:
             print(j.reg_stock_id)
             quote = nse.get_quote(j.reg_stock_id.nse_code)
             print(quote['buyPrice1'])
+            if k2<quote['buyPrice1']*j.no_of_shares:
+                p1=j.reg_stock_id.stock_name
             sum+=(quote['buyPrice1']*j.no_of_shares)
-        p.append(sum)
+        p.append(int(sum))
+        p.append(p1)
         k.append(p)
-    k.sort(key = lambda x: x[1])
-    print(k)
-    return render(request, 'Stock_Game/stocklist.html')
-
-
+    k.sort(key = lambda x: x[1], reverse=True)
+    p2=[]
+    k3=1
+    for i in k:
+        h1=dict()
+        h1['rank']=k3
+        h1['name']=i[0]
+        h1['sum']=i[1]
+        k3+=1
+        h1['Stock']=i[2]
+        p2.append(h1)
+    print(p2)
+    param={'k':p2}
+    return render(request, 'Stock_Game/stocker.html',param)
 
 def portfolio(request,team_name):
     us=request.user
     nse = Nse()
     Room1=Room.objects.filter(id=team_name)
     init=Room1[0].room_money
+    name=Room1[0].room_name
+    id1=Room1[0].id
     Profile1=Profile.objects.filter(user=request.user)
     for i in Profile1:
         k=i
@@ -75,11 +162,12 @@ def portfolio(request,team_name):
         inv+=(i.current_stock_price)*(i.no_of_shares)
         k.append(k2)
     print(k)
-    param={'k':k,'money_left':(init-inv),'Profit':(init-inv+sum),'Initial':init}
+    param={'k':k,'money_left':(init-inv),'Profit':(init-inv+sum),'Initial':init,'name':name,'id':id1}
     return render(request, 'Stock_Game/portfolio.html',param)
 # Create your views here.
 def stockers(request,stock):
     nse = Nse()
+    quote = nse.get_quote(stock)
     param={'stock_name':quote['companyName'],'Stock_price':quote['buyPrice1']}
     return render(request, 'Stock_Game/stocker.html',param)
 
