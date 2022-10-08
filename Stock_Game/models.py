@@ -2,7 +2,6 @@ from django.db import models
 from User.models import Profile, Consultant, Subscribe
 # Create your models here.
 class Room(models.Model):
-
     reg_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     room_name = models.CharField(max_length=30)
     starts_in = models.TimeField()
@@ -13,7 +12,6 @@ class Room(models.Model):
         return self.room_name
 
 class Join(models.Model):
-
     reg_user_id = models.OneToOneField(Profile, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     user_money = models.FloatField()

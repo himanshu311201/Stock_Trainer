@@ -109,41 +109,23 @@
   </head>
   <body>
   <main>
-	    <div class="container px-4" id="custom-cards">
-          <center>
-    <h2 class="pb-2 border-bottom" style="color:white">Ranking: GLOBAL</h2>
-            </center>
-
-    <div class="row row-cols-1 row-cols-lg-1 align-items-stretch g-4 ">
+	    <div class="container px-4 py-5" id="custom-cards">
+            <center>
+    <h2 class="pb-2 border-bottom" style="color:white">Team Created Successfully!</h2>
+                </center>
+<center>
+    <div class="row row-cols-1 row-cols-lg-1 align-items-stretch g-4 py-5">
+        <center>
       <div class="col">
         <div class="card card-cover h-100 overflow-hidden text-bg-light rounded-4 shadow-lg">
-          <div class="d-flex flex-column h-100 p-5 pb-1 text-black text-shadow-1">
-            <div style="font-size:20px;">
-              <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Rank</th>
-      <th scope="col">Name</th>
-      <th scope="col">Money</th>
-      <th scope="col">Top earner</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for i in k %}
-    <tr>
-      <th scope="row">{{i.rank}}</th>
-      <td>{{i.name}}</td>
-      <td>{{i.sum}}</td>
-      <td>{{i.Stock}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-            </div>
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-black text-shadow-1">
+			 <center> </center>
+              <h2>Share this code with your friends and invite them for this amazing journey</h2>
+             <h1 style="color:red;font-weight:1.0;">{{hex}}</h1>
           </div>
         </div>
       </div>
+        </center>
     </div>
-  </div>
-
+        </div>
   </main>

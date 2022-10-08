@@ -109,41 +109,24 @@
   </head>
   <body>
   <main>
-	    <div class="container px-4" id="custom-cards">
-          <center>
-    <h2 class="pb-2 border-bottom" style="color:white">Ranking: GLOBAL</h2>
-            </center>
+	    <div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom" style="color:white">Welcome, Himanshu Mishra</h2>
 
-    <div class="row row-cols-1 row-cols-lg-1 align-items-stretch g-4 ">
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+        <center>
       <div class="col">
         <div class="card card-cover h-100 overflow-hidden text-bg-light rounded-4 shadow-lg">
-          <div class="d-flex flex-column h-100 p-5 pb-1 text-black text-shadow-1">
-            <div style="font-size:20px;">
-              <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Rank</th>
-      <th scope="col">Name</th>
-      <th scope="col">Money</th>
-      <th scope="col">Top earner</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for i in k %}
-    <tr>
-      <th scope="row">{{i.rank}}</th>
-      <td>{{i.name}}</td>
-      <td>{{i.sum}}</td>
-      <td>{{i.Stock}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-            </div>
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-black text-shadow-1">
+			 <center> <h2>Team Code</h2>
+                 <br>
+                    <h1>{{}}</h1>
+                 <br>
+             </center>
+
           </div>
         </div>
       </div>
+        </center>
     </div>
-  </div>
-
+        </div>
   </main>

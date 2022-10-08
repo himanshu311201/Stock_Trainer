@@ -110,36 +110,56 @@
   <body>
   <main>
 	    <div class="container px-4" id="custom-cards">
-          <center>
-    <h2 class="pb-2 border-bottom" style="color:white">Ranking: GLOBAL</h2>
-            </center>
+    <h2 class="pb-2 border-bottom" style="color:white">Team: {{name}}</h2>
 
     <div class="row row-cols-1 row-cols-lg-1 align-items-stretch g-4 ">
       <div class="col">
         <div class="card card-cover h-100 overflow-hidden text-bg-light rounded-4 shadow-lg">
           <div class="d-flex flex-column h-100 p-5 pb-1 text-black text-shadow-1">
-            <div style="font-size:20px;">
-              <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Rank</th>
-      <th scope="col">Name</th>
-      <th scope="col">Money</th>
-      <th scope="col">Top earner</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for i in k %}
-    <tr>
-      <th scope="row">{{i.rank}}</th>
-      <td>{{i.name}}</td>
-      <td>{{i.sum}}</td>
-      <td>{{i.Stock}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+            <h4> Total Profit: {{Profit}}</h4>
+            <h4>Money available:{{money_left}}</h4>
+            <h4>Initial fund:{{Initial}} </h4>
+            <br>
+            <center>
+              <a class="btn btn-lg btn-primary"  style="background-color:#3F00FF;padding:6px;margin: 8px;" href="/ranklist/{{id}}/">View Ranklist</a>
+              <a class="btn btn-lg btn-primary" href="/stocks/{{id}}/" style="background-color:#3F00FF;padding:6px;">Add stocks</a>
+              <br>
+              <br>
+              <b><h2 style="text-decoration: underline;
+  text-decoration-thickness: auto; ">Portfolio</h2></b>
+              </center>
+            {% for i in k %}
+              <div class="row">
+              <div class="col">
+                <h4>{{i.stock_name}}</h4>
+                <script>
+                  document.getElementById("profit").style.color = "blue";
+                  if(document.getElementById('money_inv').value>document.getElementById('curr_money').value){
+                    document.getElementById('profit').style.Color = '#5bc556';
+                      console.log('Green');
+                  }
+                  else {
+                       document.getElementById('profit').style.Color = '#5bc556';
+                       console.log('REd');
+                  }
+              </script>
+                <h6 >Profit/Loss:<span id="profit>">{{i.profit}}</span></h6>
+                <script>
+                  document.getElementById("profit").style.color = "blue";
+                  </script>
+                <h6 id="money_inv">Invested Price:{{i.old_price}}</h6>
+                <h6 id="curr_money">Current Price: {{i.Current_price}}</h6>
+                <h6 id="qty">Qty:{{i.no_of_shares}}</h6>
+              </div>
+              <div class="col">
+
+              </div>
+              <div class="col">
+                <span><a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;margin:10px">Add</a>
+                  <a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;">Sell</a></span>
+              </div>
             </div>
+            {% endfor %}
           </div>
         </div>
       </div>

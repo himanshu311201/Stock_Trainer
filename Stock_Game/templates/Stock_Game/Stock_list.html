@@ -110,40 +110,31 @@
   <body>
   <main>
 	    <div class="container px-4" id="custom-cards">
-          <center>
-    <h2 class="pb-2 border-bottom" style="color:white">Ranking: GLOBAL</h2>
-            </center>
+            <center>
+    <h2 class="pb-2 border-bottom" style="color:white">Stocks</h2>
+                </center>
 
     <div class="row row-cols-1 row-cols-lg-1 align-items-stretch g-4 ">
       <div class="col">
         <div class="card card-cover h-100 overflow-hidden text-bg-light rounded-4 shadow-lg">
           <div class="d-flex flex-column h-100 p-5 pb-1 text-black text-shadow-1">
-            <div style="font-size:20px;">
-              <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Rank</th>
-      <th scope="col">Name</th>
-      <th scope="col">Money</th>
-      <th scope="col">Top earner</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for i in k %}
-    <tr>
-      <th scope="row">{{i.rank}}</th>
-      <td>{{i.name}}</td>
-      <td>{{i.sum}}</td>
-      <td>{{i.Stock}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+{% for i in k %}
+    <div class="row">
+              <div class="col">
+                <h4>{{i.name}}</h4>
+                <h6>Current Price:{{i.Price}}</h6>
+              </div>
+              <div class="col">
 
+              </div>
+              <div class="col">
+                <span><a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;margin:10px">View Details</a>
+                  </span>
+              </div>
+            </div>
+    {% endfor %}
+          </div>
+        </div></div>
+    </div></div>
+        </div>
   </main>
