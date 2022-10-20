@@ -53,7 +53,7 @@ def join(request):
             post.save()
             return redirect('home')
     return redirect('home')
-def index(request):
+def main_home(request):
     room1 = Room.objects.filter(id=1)
     for i in room1:
         k1 = i
