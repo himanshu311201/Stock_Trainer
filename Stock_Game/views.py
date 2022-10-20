@@ -95,6 +95,8 @@ def stocks_list(request,team_name):
         quote = nse.get_quote(i.nse_code)
         d['name']=i.stock_name
         d['Price']=quote['buyPrice1']
+        d['id']=team_name
+        d['nse_code']=i.nse_code
         k.append(d)
     param={'k':k}
     return render(request,'Stock_Game/Stock_list.html',param)
