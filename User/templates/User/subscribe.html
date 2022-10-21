@@ -1,12 +1,159 @@
 {% extends 'User/base.html' %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'User/css/subscriber.css' %}?{% now "U" %}">
-{% endblock css %}
-{% block content %}
-<!-- partial:index.partial.html -->
 
-<!-- partial -->
+<link rel="stylesheet" href="{% static 'User/css/subscriber.css' %}?{% now "U" %}">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{% static 'User/css/templatemo_style.css' %}?{% now "U" %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+{% endblock css %}
+
+
+{% block content %}
+<div id="main-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="logo">
+                    <h3 style="color: orange;">Stocker</h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="main-menu">
+                    <ul>
+                        <li><a href="{% url 'main' %}">Home</a></li>
+                        <li><a href="about-us.html">About</a></li>
+                        <li><a href="contact-us.html">Contact</a></li>
+                        <li><a href="contact-us.html" style="color: orange;">Welcome,  {{ request.user.username }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="search-box">  
+                    <form name="search_form" method="get" class="search_form">
+                        <input id="search" type="text" />
+                        <input type="submit" id="search-button" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../../static/User/images/blog4.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block justify-content-center">
+            <h1 class="pa">Make a mark</h1>
+            <br>
+            <a href="#latest-blog" class="btn" style="background-color: orange ;">View authors</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="../../static/User/images/blog2.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+            <h1 class="pa">Share your Knowledge</h1>
+            <br>
+            <a href="#latest-blog" class="btn" style="background-color: orange ;">View authors</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="../../static/User/images/blog1.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+            <h1 class="pa">Chance to feature in Top authors</h1>
+            <br>
+            <a href="#latest-blog" class="btn" style="background-color: orange ;">View authors</a>
+          </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+
+        <div id="latest-blog">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="heading-section">
+                            <h2>Our Top Authors</h2>
+                            <img src="../../static/User/images/under-heading.png" alt="" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for u in c %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="blog-post">
+                            <div class="blog-thumb">
+                                <img src="/media/{{ u.consultant_id.image_field }}" alt="" />
+                            </div>
+                            <div class="blog-content" onmouseover="mouseOn(this)" onmouseleave="mouseOff(this)">
+                                <div class="content-show">
+                                    <h4><a href="">{{ u.consultant_id.user.username }}</a></h4>
+                                </div>
+                                <div class="content-hide h">
+                                    <p style="color: wheat;">{{ u.consultant_id.about_me }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        {% endblock content %}
+{% block js %}
+<script src="{% static 'User/js/subscribe.js' %}?{% now "U" %}"></script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 <div class="container-fluid justify-content-center text-center" style="background-color:rgba(0,0,0,0.5)">
     <div class="row justify-content-center">
             <h1 class="justify-content-center h1" style="padding-top: 9%; padding-bottom: 9%; font-size: 100px; color:white;font-style: italic;">Our Authors</h1>
@@ -15,7 +162,6 @@
 <hr>
 <div class="container-fluid" style="width: 100%; overflow-x:scroll">
     <div class="row flex-row flex-nowrap " style="width:100%;">
-        {% if c.all %}
         {% for u in c %}
             <div class="col-3">
                 <div class="card" style="width: 18rem;margin-right: 2%;">
@@ -31,7 +177,7 @@
             </div>
           {% endfor %}
     </div>
-</div>
+</div> -->
 <!-- <div class="container-fluid horizontal-scrollable justify-content-center">
     <div class="container-fluid py-2">
         <div class="row">
@@ -51,4 +197,4 @@
     </div>
    
 </div> -->
-{% endblock content %}
+

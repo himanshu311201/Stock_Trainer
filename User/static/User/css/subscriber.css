@@ -1,3 +1,39 @@
-h1{
-    font-size: 50%;
+.cimg{
+    width: 100%;
+  }
+.carousel-inner{
+    width:100%;
+    max-height: 500px !important;
+    overflow: hidden;
+}
+.carousel-item{
+  max-height: inherit;
+  -webkit-transform-style: preserve-3d;
+-moz-transform-style: preserve-3d;
+transform-style: preserve-3d;
+}
+p{
+  overflow-wrap: break-word;
+}
+img{
+  max-height: inherit;
+}
+.carousel-caption{
+  top: 50%;
+transform: translateY(-50%);
+bottom: initial;
+}
+.pa{
+  font-size:70px;
+}
+.blog-post{
+  height: 250px;
+  margin: 0;
+}
+.blog-thumb{
+  height: inherit;
+}
+
+.blog-thumb>img{
+  height: inherit;
 }

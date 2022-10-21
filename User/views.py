@@ -67,6 +67,7 @@ class PostCreate(LoginRequiredMixin,CreateView):
     form_class=CreateBlogs
 
     def form_valid(self,form):
+        print(self.request.user)
         form.instance.author=self.request.user.Profile.Consultant
         return super().form_valid(form)   
 

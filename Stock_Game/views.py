@@ -100,6 +100,7 @@ def stocks_list(request,team_name):
         k.append(d)
     param={'k':k}
     return render(request,'Stock_Game/Stock_list.html',param)
+    
 def ranklist(request,team_name):
     print(team_name)
     room1=Room.objects.filter(id=team_name)

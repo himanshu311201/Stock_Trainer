@@ -47,6 +47,6 @@ class Blogs(models.Model):
     # upvotes=models.ForeignKey(User, verbose_name='', on_delete=models.CASCADE,related_name='upv')
 
     def get_absolute_url(self):
-        return reverse('home')
+        return reverse('main')
     
   
