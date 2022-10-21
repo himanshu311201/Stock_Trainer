@@ -1,0 +1,217 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'Stock_Game/css/index.css' %}">
+    <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+  
+        .b-example-divider {
+          height: 3rem;
+          background-color: rgba(0, 0, 0, .1);
+          border: solid rgba(0, 0, 0, .15);
+          border-width: 1px 0;
+          box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+  
+        .b-example-vr {
+          flex-shrink: 0;
+          width: 1.5rem;
+          height: 100vh;
+        }
+  
+        .bi {
+          vertical-align: -.125em;
+          fill: currentColor;
+        }
+  
+        .nav-scroller {
+          position: relative;
+          z-index: 2;
+          height: 2.75rem;
+          overflow-y: hidden;
+        }
+  
+        .nav-scroller .nav {
+          display: flex;
+          flex-wrap: nowrap;
+          padding-bottom: 1rem;
+          margin-top: -1px;
+          overflow-x: auto;
+          text-align: center;
+          white-space: nowrap;
+          -webkit-overflow-scrolling: touch;
+        }
+        body{
+      margin:0;
+      padding:0;
+      font-family:"arial",heletica,sans-serif;
+      font-size:12px;
+      background: #2980b9 url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0;
+      -webkit-animation: 10s linear 0s normal none infinite animate;
+      -moz-animation: 10s linear 0s normal none infinite animate;
+      -ms-animation: 10s linear 0s normal none infinite animate;
+      -o-animation: 10s linear 0s normal none infinite animate;
+      animation: 10s linear 0s normal none infinite animate;
+  
+  }
+  
+  @-webkit-keyframes animate {
+      from {background-position:0 0;}
+      to {background-position: 500px 0;}
+  }
+  
+  @-moz-keyframes animate {
+      from {background-position:0 0;}
+      to {background-position: 500px 0;}
+  }
+  
+  @-ms-keyframes animate {
+      from {background-position:0 0;}
+      to {background-position: 500px 0;}
+  }
+  
+  @-o-keyframes animate {
+      from {background-position:0 0;}
+      to {background-position: 500px 0;}
+  }
+  
+  @keyframes animate {
+      from {background-position:0 0;}
+      to {background-position: 500px 0;}
+  }
+
+      </style>
+  
+    <title>Stocker Trainer</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-light navPad" style="background-color: #377dc34d">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand logoPad hh66Heading" style="width: 148px;height: 40px;">Stock Trainer</a>
+            <form class="d-flex">
+                <a href="/user" class="btn loginBtn btnPrimary">Login/Register</a>
+            </form>
+        </div>
+    </nav>
+
+    <div id="homepage">
+        <div>
+            <div class="container web-align">
+                <div class="row">
+                    <section>
+                        <div class="valign-wrapper hh66Wrapper">
+                            <div class="hh66leftWrapper valign-wrappe row">
+                                <div>
+                                    <h1 class="hh66Heading">Invest In
+                                        <div class="slidingVertical">
+                                            <span>Stocks</span>
+                                        </div>
+                                    </h1>
+                                    <h1 class="hh66Heading">Get Suggestion by
+                                        <div class="slidingVertical">
+                                            <span> Our Consultant</span>
+                                        </div>
+                                    </h1>
+                                    
+                                <div>
+                                        <h4 id="heroText1" class="para hh66Para animated fadeInUp">Trusted by
+                                            <b>Some</b> the Indian.<br>Start <b>Investment</b> today & <b>Practice</b> from <a href="/login" class="text-decoration-none">here</a>
+                                        </h4>
+                                        <div class="animated fadeInUp">
+                                            <div>
+                                                <div class="btn btnTransPrimary btnPrimary" style="width: 200px; height: 55px;">
+                                                    <div class="absolute-center btnParentDimension" >
+                                                        <span class="absolute-center" style="padding: 0px 25px">
+                                                        <a href="/user" style="text-decoration: None; color: white;"> Get Started </a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media-margin">
+                                <div class="valign-wrapper">
+                                    <a href="/stocks" class="hh66Card cur-po animated fadeInUp text-decoration-none" target="_blank" id="homeBox1">
+                                        <img src="{% static 'Stock_Game/images/stockHome.af2af225.svg' %}" alt="Stock" width="49" height="49">
+                                        <div class="hh66CardText">Stocks</div>
+                                    </a>
+                                    <a href="/blog" class="hh66Card cur-po animated fadeInUp text-decoration-none" id="homeBox1">
+                                        <img src="{% static 'Stock_Game/images/blogging.png' %}" alt="Stock" width="49" height="49">
+                                        <div class="hh66CardText">Blog</div>
+                                    </a>
+                                </div>
+                                <div class="valign-wrapper">
+                                    <a href="/consultant" class="hh66Card cur-po animated fadeInUp text-decoration-none" target="_blank" id="homeBox1">
+                                        <img src="{% static 'Stock_Game/images/analysis.png' %}" alt="Stock" width="49" height="49">
+                                        
+                                        <div class="hh66CardText">Consultant</div>
+                                    </a>
+                                    <a href="#info" class="hh66Card cur-po animated fadeInUp text-decoration-none" id="homeBox1">
+                                        <img src="{% static 'Stock_Game/images/info.png' %}" alt="Stock" width="49" height="49">
+                                        <div class="hh66CardText">About Us</div>
+                                    </a>
+                                </div>
+                                <!-- <div class="valign-wrapper">
+                                    <a href="/stocks" class="hh66Card cur-po animated fadeInUp text-decoration-none" target="_blank" id="homeBox1">
+                                        <img src="stockHome.af2af225.svg" alt="Stock" width="49" height="49">
+                                        <div class="hh66CardText">Stocks</div>
+                                    </a>
+                                    <a href="/stocks" class="hh66Card cur-po animated fadeInUp text-decoration-none" id="homeBox1">
+                                        <img src="stockHome.af2af225.svg" alt="Stock" width="49" height="49">
+                                        <div class="hh66CardText">Stocks</div>
+                                    </a>
+                                </div> -->
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="col 112 valign-wrapper hb44Wrapper align-bottom">
+                <div class="heading align-bottom">
+                    <footer>Keep Learning. Keep Growing</footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+    
+</body>
+
+</html>

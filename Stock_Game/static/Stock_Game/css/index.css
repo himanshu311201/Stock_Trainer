@@ -1,0 +1,370 @@
+/* NavBar */
+.px-nav{
+    padding-left: 25rem !important;
+}
+.px-blog{
+    padding-left: 5rem !important;
+}
+.px-consultant{
+    padding-left: 5rem !important;
+}
+.px-aboutUs{
+    padding-left: 5rem !important;
+}
+.navbar-collapse{
+    flex-grow: 0.2;
+}
+.color-nav{
+    color: red !important;
+}
+/* 
+@media (min-width: 768px) {
+    .color-nav {
+      font-size: 3.5rem;
+    }
+  } */
+
+  /* Index */
+.gindex-4{
+    --bs-gutter-x: 18.5rem;
+    margin-left: -7rem !important;
+}
+.pindex{
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+}
+
+
+/* Upcoming stocks */
+.upcomingStock{
+    margin-top: 1rem !important;
+    margin-left: 1rem;
+    color: blue;
+}
+.comingstock{
+    margin-left: 5rem !important;
+}
+.upcomingBG{
+    background-color:#a6efef !important;
+}
+.upcomingmargin{
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+}
+
+/*  */
+
+
+
+
+/* INDEX.HTML */
+.loginBtn{
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    margin-right: 7rem;
+}
+
+.navPad{
+    padding : 1.1rem;
+}
+.logoPad{
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+}
+.slidingVertical {
+    display: inline;
+    text-indent: 15px;
+}
+.web-align {
+    max-width: 1110px;
+    width: 100%;
+    margin: 0 auto;
+}
+.row {
+    margin-left: auto;
+    margin-right: auto;
+}
+.hh66Wrapper {
+    max-height: 700px;
+    min-height: 600px;
+    height: calc(100vh - 82px);
+    margin-top: 30px;
+}
+.valign-wrapper {
+    display: flex;
+    align-items: center;
+}
+.hh66leftWrapper {
+    min-width: 400px;
+    margin-left: 0;
+}
+.hh66Heading {
+    font-size: 38px;
+    color: white !important;
+    letter-spacing: .3px;
+    font-weight: 500;
+    -webkit-font-smoothing: auto;
+    margin: 0;
+}
+.slidingVertical {
+    display: inline;
+    text-indent: 15px;
+}
+#homepage section .para {
+    color: white !important;
+    letter-spacing: .3px;
+    font-size: 16px;
+    line-height: 32px;
+    font-weight: 400;
+}
+#homePage .fadeInUp {
+    animation-name: fadeInUp;
+}
+#homePage .animated {
+    animation-duration: 1.3s;
+    animation-fill-mode: both;
+}
+.hh66Para {
+    margin: 25px 0;
+    max-width: 362px;
+}
+.btn{
+    display: inline-block;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+}
+    
+.btnTransPrimary{
+    transition: 0.8s;
+    transition-duration: 0.8s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+.btnPrimary{
+    background: #00d09c;
+    color: white;
+}
+.absolute-center, .valign-wrapper {
+    display: flex;
+    align-items: center;
+}
+.btnParentDimension{
+    height: inherit;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.text-decoration-none{
+    text-decoration: none !important;
+    color: white !important;
+}
+#homePage .animated {
+    animation-duration: 1.3s;
+    animation-fill-mode: both;
+}
+.hh66Card {
+    width: 205px;
+    height: 155px;
+    background: white;
+    box-shadow: 3px 6px 24px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 50px;
+    opacity: 1;
+    padding: 20px;
+}
+.cur-po {
+    cursor: pointer;
+}
+a {
+    color: #5367ff;
+}
+.hh66CardText {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
+    letter-spacing: .02em;
+    color: #44475b;
+    margin-top: 20px;
+}
+
+.row .col {
+    float: left;
+    box-sizing: border-box;
+    min-height: 1px;
+}
+.hb44Wrapper {
+    flex-direction: column;
+    margin-top: 70px;
+}
+#homePage .heading {
+    font-size: 36px;
+    color: #44475b;
+    line-height: 25px;
+    letter-spacing: .2px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    background-color: black;
+}
+
+@media (max-width: 937px) {
+    .loginBtn{
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        margin-right: -0.9rem;
+    }
+    
+    .navPad{
+        padding : 0.49rem;
+    }
+    .logoPad{
+        padding-left: 0.2rem;
+        padding-top: 0.2rem;
+    }
+    .slidingVertical {
+        display: inline;
+        text-indent: 15px;
+        color:#040b46 !important;
+    }
+    .web-align {
+        max-width: 1110px;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .row {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hh66Wrapper {
+        max-height: 700px;
+        min-height: 600px;
+        height: calc(100vh - 82px);
+        margin-top: 30px;
+    }
+    .valign-wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .hh66leftWrapper {
+        min-width: 300px;
+        margin-left: 0;
+    }
+    .media-margin{
+        margin-left: -5rem !important;
+    }
+    .hh66Heading {
+        font-size: 38px;
+        color: #44475b;
+        letter-spacing: .3px;
+        font-weight: 500;
+        -webkit-font-smoothing: auto;
+        margin: 0;
+    }
+    .slidingVertical {
+        display: inline;
+        text-indent: 15px;
+    }
+    #homePage section .para {
+        color: var(--subText);
+        letter-spacing: .3px;
+        font-size: 16px;
+        line-height: 32px;
+        font-weight: 400;
+    }
+    #homePage .fadeInUp {
+        animation-name: fadeInUp;
+    }
+    #homePage .animated {
+        animation-duration: 1.3s;
+        animation-fill-mode: both;
+    }
+    .hh66Para {
+        margin: 25px 0;
+        max-width: 362px;
+    }
+    .btn{
+        display: inline-block;
+        font-weight: 500;
+        border-radius: 4px;
+        cursor: pointer;
+        white-space: nowrap;
+        position: relative;
+    }
+        
+    .btnTransPrimary{
+        transition: 0.8s;
+        transition-duration: 0.8s;
+        transition-timing-function: ease;
+        transition-delay: 0s;
+    }
+    .btnPrimary{
+        background: #00d09c;
+        color: white;
+    }
+    .absolute-center, .valign-wrapper {
+        display: flex;
+        align-items: center;
+    }
+    .btnParentDimension{
+        height: inherit;
+    }
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .text-decoration-none{
+        text-decoration: none !important;
+    }
+    #homePage .animated {
+        animation-duration: 1.3s;
+        animation-fill-mode: both;
+    }
+    .hh66Card {
+        width: 205px;
+        height: 155px;
+        background: white;
+        box-shadow: 3px 6px 24px rgba(0,0,0,0.1);
+        border-radius: 20px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-left: 50px;
+        opacity: 1;
+        padding: 20px;
+    }
+    .cur-po {
+        cursor: pointer;
+    }
+    a {
+        color: #5367ff;
+    }
+    .hh66CardText {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 160%;
+        letter-spacing: .02em;
+        color: #44475b;
+        margin-top: 20px;
+    }
+    
+    .row .col {
+        float: left;
+        box-sizing: None !important;
+        min-height: 1px;
+    }
+    
+    #homePage .heading {
+        font-size: 36px;
+        color: #44475b;
+        line-height: 25px;
+        letter-spacing: .2px;
+        font-weight: 500;    
+    }
+}
