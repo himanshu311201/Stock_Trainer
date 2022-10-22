@@ -7,6 +7,11 @@ from operator import itemgetter
 from .models import Stock,Buy,Room, Join
 from User.models import Profile,Subscribe,Consultant
 from .forms import CreateForm
+
+def index(request):
+    return render(request,"Stock_Game/index.html")
+
+    
 # creating a Nse object
 nse = Nse()
 def Create_team(request):
