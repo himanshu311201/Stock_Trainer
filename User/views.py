@@ -8,6 +8,8 @@ from django.views.generic import CreateView,ListView
 from .forms import CreateBlogs
 from .models import Blogs
 from django.contrib.auth.decorators import login_required
+from django.views import View
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -71,3 +73,16 @@ class PostCreate(LoginRequiredMixin,CreateView):
         form.instance.author=self.request.user.Profile.Consultant
         return super().form_valid(form)   
 
+class upvote(View):
+    def post(self,request):
+        r=request.POST['blog']
+        if(Blogs.objects.get(pk=r).upvotes.filter(username=request.user).count()==0):
+            b1=Blogs.objects.get(pk=r)
+            b1.upvotes.add(request.user)
+            print(request.user.username)
+            print("jkdhw")
+            b1.save()
+            return JsonResponse({'bool':True})
+        else:
+            Blogs.objects.get(pk=r).upvotes.remove(request.user)
+            return JsonResponse({'bool':False})

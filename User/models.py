@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, related_name='Profile', on_delete=models.CASCADE)
@@ -42,7 +43,7 @@ class Blogs(models.Model):
     # blogs=models.TextField()
     date_posted=models.DateTimeField(default=timezone.now)
     author=models.ForeignKey(Consultant,related_name='blog',on_delete=models.CASCADE)
-    # upvotes=models.ManyToManyField(User,related_name="upv")
+    upvotes=models.ManyToManyField(User,related_name="upv")
     # globalblog=models.BooleanField(default=False)
     # upvotes=models.ForeignKey(User, verbose_name='', on_delete=models.CASCADE,related_name='upv')
 

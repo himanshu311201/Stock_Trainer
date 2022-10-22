@@ -13,5 +13,6 @@ urlpatterns=[
     path('create-blogs/',PostCreate.as_view(template_name='User/blog.html'),name="create-blog"),
     path('login/',auth_views.LoginView.as_view(template_name='User/login.html'),name='login'),
     path('logout/',auth_views.LogoutView.as_view(template_name='User/logout.html'),name='logout'),
-    path('blogs/',blog_list,name='blog_list')
+    path('blogs/',blog_list,name='blog_list'),
+     path('upvote/',upvote.as_view(),name='upvote'),
 ]

@@ -1,17 +1,21 @@
 body {
-    background-color: rgb(219, 217, 217);
+    background-image: url("../images/bgblog.jpg");
+    background-size: cover;
+    background-position-y: top;
     align-self: center;
     align-content: center;
     align-items: center;
-  }
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
   .outer {
-    display: flex;
+    display: 100vh;
+    overflow-y: scroll;
     flex-direction: column;
-    justify-content: center;
-    height: max-content;
-    background-color: rgb(219, 217, 217);
-    align-items: center;
-    align-content: center;
+    height:100vh;
+    margin-left: 3%;
   }
   
   .card {
@@ -41,20 +45,49 @@ body {
     margin-right: auto;
   }
   
-  /* .active {
-    height: 100px;
-    width: 100px;
-  } */
-  
   .inactive {
     display: none;
     opacity: 0;
   }
-  
-  .content-section {
-    background-color: white;
-  }
-  
+
   .form2 {
     background-color: blue;
   }
+
+  /*--- RESPONSIVE ---*/
+
+@media screen and (max-width: 990px) {
+  .inner{
+    margin:auto;
+    width: 100%;
+  }
+    .container{
+       width: 100%;
+    }
+}
+
+@media screen and (max-width: 568px) {
+  .inner{
+    margin:auto;
+    width: 100%;
+  }
+    .container{
+       width: 100%;
+    }
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .inner{
+    margin:auto;
+    width: 100%;
+  }
+    .container{
+       width: 100%;
+    }
+
+}
+
+
+/*--- END RESPONSIVE ---*/

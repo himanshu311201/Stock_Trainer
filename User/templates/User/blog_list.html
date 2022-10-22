@@ -3,25 +3,56 @@
 
 
 {% block css %}
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'User/css/blog_list.css' %}?{% now "U" %}">
 {% endblock css %}
 
 
 {% block content %}
+<nav class="navbar navbar-expand-lg bg-light container-fluid">
+    <div class="row container-fluid">
+        <div class="nav-item col-4" style="text-align: center;">
+          <b><a class="nav-link active" aria-current="page" href="{% url 'main' %}" style="color: orange ; font-size:x-large">Home</a></b>
+        </div>
+        <div class="brand col-4"  style="text-align: center;">
+          <b><a class="navbar-brand" href="" style="color: orange;">Stocker</a></b>
+        </div>
+        <form class="col-4" role="search"  style="text-align: center;">
+          <div class="nav-item mr-5">
+            <a class="btn" href="{% url 'create-blog' %}" style="background-color:orange ; color:white">Make a blog</a>
+          </div>
+        </form>
+        
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'main' %}">Home</a>
+          </li>
+         
+        </ul>
+        <div class="brand">
+            <a class="navbar-brand" href="">Stocker</a>
+        </div>
 
-
-
-
+        <form class="d-flex" role="search">
+          <div class="nav-item mr-5">
+            <a class="btn" href="{% url 'create-blog' %}" style="background-color:orange ;">Make a blog</a>
+          </div>
+        </form>
+      </div> -->
+    </div>
+  </nav>
 <div class="outer">
     <div class="inner">
-
         <br>
             {% for c in b %}
                 {% if c.blog.all %}
-                    <div class="container justify-content-center text-center">
-                        <h1 class="">{{ c.consultant_id.user.username }}</h1>
-                        <hr>
-                    </div>
+
                     {% for post in c.blog.all %}
                         <div class="card container" id="thumbs" data-related="{{ post.id }}" style="width: 100%;">
                             <div class="card-body">
@@ -30,9 +61,8 @@
                                     <span class="text-muted" style="margin-left: auto; font-style: italic;">By- {{ post.author }}</span>
                                 </div>
                                 <p class="card-text">{{ post.blogs|safe }} </p>
-                                <!-- <div class="container">
-                                    <button class="btn btn-primary com addcomm" id="{{ post.id }}" data-com="{{ post.id }}" onclick="start(this.id);" style="">Comments</button>
-                                </div> -->
+                                <button class="btn btn-success upv" data-blog="{{ post.id }}">Upvote it!!&nbsp;&nbsp;<span class="upvotes {{ post.id }}">{{ post.upvotes.count }}</span></button>
+                                <!-- <button class="btn btn-success">Upvote</button> -->
                             </div>
                         </div>
                     {% endfor %}
@@ -47,4 +77,43 @@
 </div>
 {% endblock %}
 
+{% block js %}
+     <script>
+         $(document).ready(function(){
+             $('.upv').on('click',function(){
+              console.log("ll");
+                 var e=$(this).data('blog');
+                //  console.log(e);
+                 $.ajax({
+                     type: "post",
+                     url: "{% url 'upvote' %}",
+                     data: {
+                         blog:e,
+                         csrfmiddlewaretoken:"{{csrf_token}}",
+                     },
+                     dataType: "json",
+                     success: function (response) {
+                         console.log(response.bool);
+                         if(response.bool==true){
+                            console.log(response);
+                            var e1=$('.'+e+'.upvotes').text();
+                            let r=parseInt(e1);
+                            console.log(e1);
+                            r++;
+                            $('.'+e+'.upvotes').text(r);
+                         }
+                         else{
+                            console.log(response);
+                            var e1=$('.'+e+'.upvotes').text();
+                            let r=parseInt(e1);
+                            console.log(e1);
+                            r--;
+                            $('.'+e+'.upvotes').text(r);
+                         }
+                     }
+                 });
+             })
+         });
+    </script>
 
+{% endblock %}
