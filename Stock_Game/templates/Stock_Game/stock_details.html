@@ -1,4 +1,5 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -65,7 +66,7 @@
       body{
 	margin:0;
 	padding:0;
-	font-family:"arial",heletica,sans-serif;
+	font-family:"arial",helvetica,sans-serif;
 	font-size:12px;
     background: #2980b9 url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0;
 	-webkit-animation: 10s linear 0s normal none infinite animate;
@@ -237,12 +238,23 @@
 
     <!-- Custom styles for this template -->
     <link href="features.css" rel="stylesheet">
+
+      <style>
+        #chartdiv {
+          width: 95%;
+          height: 450px;
+          max-width: 100%;
+          background-color: #F5F5F5;
+          margin: 20px;
+          margin-left: 30px;
+        }
+        </style>
   </head>
 <body>
 
 <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top">
-        <a class="navbar-brand" href="#">Stock Trainer</a>
+        <a class="navbar-brand" href="/main/">Stock Trainer</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -250,22 +262,17 @@
           <ul class="navbar-nav mr-auto">
               <div class = "inline">
                   <li class="nav-item active">
-                    <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/stocks/{{room_id}}/">Stocks<span class="sr-only">(current)</span></a>
                   </li>
               </div>
             <div class = "inline">
                   <li class="nav-item active">
-                    <a class="nav-link" href="#">Trade <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/portfolio/{{room_id}}/">My Portfolio <span class="sr-only">(current)</span></a>
                   </li>
             </div>
             <div class = "inline">
                   <li class="nav-item active">
-                    <a class="nav-link" href="#">Account <span class="sr-only">(current)</span></a>
-                  </li>
-            </div>
-            <div class = "inline">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="#">New To investing ? <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">New To investing ? <span class="sr-only">(current)</span></a>
                   </li>
             </div>
           </ul>
@@ -278,20 +285,20 @@
 
     </header>
   <main>
-    <div class="container px-4 py-5" id="custom-cards">
-      <h4 class="pb-3 border-bottom" style="color:white; margin-top: 20px">Welcome, {{request.user}}</h4>
+    <div class="container px-0" style="padding-top: 60px; padding-bottom: 20px; " id="custom-cards">
+      <h4 class="pb-3 border-bottom" style="color:white">Welcome, {{request.user}} to the Room {{room_name}}</h4>
     </div>
-    <div class="container px-4 py-2" id="custom-cards1">
+    <div class="container px-0 py-2" id="custom-cards1">
       <h4 style="color:white">Room Name : {{room_name}}</h4>
     </div>
-    <div class="container px-4 py-2" id="custom-cards2">
-      <h4 style="color:white">Stock Name : {{stock_name}}</h4>
+    <div class="container px-0 py-2" id="custom-cards2">
+      <h4 style="color:white">Stock Name : {{temp}}</h4>
     </div>
-    <div class="container px-4 py-2" id="custom-cards3">
+    <div class="container px-0 py-2" id="custom-cards3">
       <h4 style="color:white">Current Stock Price : Rs.{{current_stock_price}}</h4>
     </div>
-    <div class="container px-4 py-2" id="custom-cards4">
-      <h4 style="color:white">Balance Available associated for this Room : Rs.{{room_balance}}</h4>
+    <div class="container px-0 py-2" id="custom-cards4">
+      <h4 style="color:white">Balance Amount for this Room : Rs.{{room_balance}}</h4>
     </div>
      <div style="text-align: center;">
           <div style = "text-align: center;  display: inline-block;">
@@ -304,7 +311,7 @@
                     color: black; border: 2px solid yellow; border-radius: 5px; width: 400px;height: 50px;">Buy Shares of {{temp}}</button>
 
                     <!-- The Modal -->
-                    <form method="POST" action="/{{room_name}}/{{stock_name}}/{{current_stock_price}}/">
+                    <form method="POST" action="{{current_stock_price}}/">
                         {% csrf_token %}
                         <div id="myModal" class="modal">
 
@@ -338,51 +345,55 @@
                 </div>
             </div>
 
-        <div style = "text-align: center; display: inline-block;">
-            <div style="width: auto; margin: 20px;">
-<!--               <a href="/update/{{i.id}}" class="btn btn-primary" style="margin-right:10px;">Rate</a>-->
-                    <!-- Trigger/Open The Modal -->
+<!--        <div style = "text-align: center; display: inline-block;">-->
+<!--            <div style="width: auto; margin: 20px;">-->
+<!--&lt;!&ndash;               <a href="/update/{{i.id}}" class="btn btn-primary" style="margin-right:10px;">Rate</a>&ndash;&gt;-->
+<!--                    &lt;!&ndash; Trigger/Open The Modal &ndash;&gt;-->
 
-                    <!-- Trigger/Open The Modal -->
-                    <button id="myBtn_new" class="btn_new" style="background-color: yellow; font-weight: bold; font-size: 18px;
-                    color: black; border: 2px solid yellow; border-radius: 5px; width: 400px;height: 50px;">Sell Shares of {{temp}}</button>
+<!--                    &lt;!&ndash; Trigger/Open The Modal &ndash;&gt;-->
+<!--                    <button id="myBtn_new" class="btn_new" style="background-color: yellow; font-weight: bold; font-size: 18px;-->
+<!--                    color: black; border: 2px solid yellow; border-radius: 5px; width: 400px;height: 50px;">Sell Shares of {{temp}}</button>-->
 
-                    <!-- The Modal -->
-                    <form method="POST" action="{{current_stock_price}}/{{no_of_shares}}/">
-                        {% csrf_token %}
-                        <div id="myModal_new" class="modal_new">
+<!--                    &lt;!&ndash; The Modal &ndash;&gt;-->
+<!--                    <form method="POST" action="{{current_stock_price}}/{{no_of_shares}}/">-->
+<!--                        {% csrf_token %}-->
+<!--                        <div id="myModal_new" class="modal_new">-->
 
-                      <!-- Modal content -->
-                      <div class="modal_new-content">
-                        <div class="modal_new-header">
-                          <h5 style="margin-top: 10px">Withdraw your invested amount</h5>
-                            <span class="close_new">&times;</span>
-                        </div>
-                        <div class="modal_new-body" style="text-align: left;">
-                            <h6 style="margin-top: 10px;">Current Stock Price : Rs.{{current_stock_price}}</h6>
+<!--                      &lt;!&ndash; Modal content &ndash;&gt;-->
+<!--                      <div class="modal_new-content">-->
+<!--                        <div class="modal_new-header">-->
+<!--                          <h5 style="margin-top: 10px">Withdraw your invested amount</h5>-->
+<!--                            <span class="close_new">&times;</span>-->
+<!--                        </div>-->
+<!--                        <div class="modal_new-body" style="text-align: left;">-->
+<!--                            <h6 style="margin-top: 10px;">Current Stock Price : Rs.{{current_stock_price}}</h6>-->
 
-                            <h6 style="margin-top: 15px;">Quantity(No.of shares you were holding) : {{no_of_shares}}</h6>
+<!--                            <h6 style="margin-top: 15px;">Quantity(No.of shares you were holding) : {{no_of_shares}}</h6>-->
 
-                            <h6 style="display : inline-block; height: 30px; margin-top: 10px">Total amount to be getting invested : Rs. </h6>
+<!--                            <h6 style="display : inline-block; height: 30px; margin-top: 10px">Total amount to be getting invested : Rs. </h6>-->
 
-                            <a href = "javascript: void(0)" onclick="calc()"></a>
-                            <span><input type = "text" name = "output1" id = "output1" value = ""></span>
-                        </div>
-                        <div>
-                            <button id="myBtn_new1" class="btn btn-primary" style =  "margin-bottom: 5px">Withdraw your Amount</button>
-                        </div>
-                        <div class="modal_new-footer">
-                        </div>
-                      </div>
+<!--                            <a href = "javascript: void(0)" onclick="calc()"></a>-->
+<!--                            <span><input type = "text" name = "output1" id = "output1" value = ""></span>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <button id="myBtn_new1" class="btn btn-primary" style =  "margin-bottom: 5px">Withdraw your Amount</button>-->
+<!--                        </div>-->
+<!--                        <div class="modal_new-footer">-->
+<!--                        </div>-->
+<!--                      </div>-->
 
-                    </div>
-                    </form>
-                </div>
-            </div>
-      </div>
-    <div class="container px-4 py-5" id="custom-cards5">
-      <h4 class="pb-3 border-bottom" style="color:white">Predicting Future Price for that particular stock ..</h4>
-    </div>
+<!--                    </div>-->
+<!--                    </form>-->
+<!--                    <form method="POST" action="{{current_stock_price}}/{{no_of_shares}}/pred/">-->
+<!--                        {% csrf_token %}-->
+<!--                        <div>-->
+<!--                            <button id="myBtn_new2" class="btn btn-primary" style =  "margin-bottom: 5px">Predict</button>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--      </div>-->
+
 <!--        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
 <!--        <div id="chart_div"></div>-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -500,4 +511,18 @@ function drawCurveTypes() {
             $('#output1').val({{no_of_shares}} * {{current_stock_price}});
       </script>
   </div>
+      <div class="container px-0 py-2" id="custom-cards5">
+      <h4 class="pb-3 border-bottom" style="color:white">Graphical representation of {{temp}} shares ..</h4>
+    </div>
+      <div class="container px-0 py-2" id="custom-cards6">
+      <h4 class="pb-3" style="color:white">User can make use of our trained algorithm for predicting share prices by clicking here ...</h4>
+    </div>
+      <span style="text-align: center">
+          <form method="POST" action="{{current_stock_price}}/{{no_of_shares}}/pred/">
+          {% csrf_token %}
+          <div>
+              <button id="myBtn_new2" class="btn btn-primary" style =  "margin-bottom: 5px; height: 50px; width: 380px; background: yellow; color: black; font-size: 18px; font-weight: bold;">Predict</button>
+          </div>
+         </form>
+      </span>
 </main>

@@ -12,7 +12,7 @@ class Room(models.Model):
         return self.room_name
 
 class Join(models.Model):
-    reg_user_id = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    reg_user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     user_money = models.FloatField()
 
