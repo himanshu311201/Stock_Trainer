@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.104.2">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/features/">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      body{
+	margin:0;
+	padding:0;
+	font-family:"arial",helvetica,sans-serif;
+	font-size:12px;
+    background: #2980b9 url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0;
+	-webkit-animation: 10s linear 0s normal none infinite animate;
+	-moz-animation: 10s linear 0s normal none infinite animate;
+	-ms-animation: 10s linear 0s normal none infinite animate;
+	-o-animation: 10s linear 0s normal none infinite animate;
+	animation: 10s linear 0s normal none infinite animate;
+
+}
+
+@-webkit-keyframes animate {
+	from {background-position:0 0;}
+	to {background-position: 500px 0;}
+}
+
+@-moz-keyframes animate {
+	from {background-position:0 0;}
+	to {background-position: 500px 0;}
+}
+
+@-ms-keyframes animate {
+	from {background-position:0 0;}
+	to {background-position: 500px 0;}
+}
+
+@-o-keyframes animate {
+	from {background-position:0 0;}
+	to {background-position: 500px 0;}
+}
+
+@keyframes animate {
+	from {background-position:0 0;}
+	to {background-position: 500px 0;}
+}
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Carousel Template for Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="carousel.css" rel="stylesheet">
+      <style>
+          #custom-cards{
+          margin-top: 25px;
+          }
+           nav {
+           background: 	#8A2BE2;
+           }
+          .inline{
+          display: inline-block;
+          border-radius: 6px;
+          margin: 2px;
+          }
+          .inline:active{
+          color: white;
+          background: #9370DB
+          }
+          .inline:hover{
+
+          color: white;
+          background: #9370DB
+          }
+          button{
+          background: orange;
+          color: white;
+          }
+          #but:hover{
+            background: #32CD32;
+          }
+          .room{
+          font-weight: bold;
+          font-size: 25px;
+          margin-left : 20px;
+          }
+      </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="features.css" rel="stylesheet">
+
+     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <style>
+
+    .card {
+    margin-top:10px;
+    }
+    body {
+        background-color: #FFCC99;
+    }
+    /* The Modal (background) */
+    .modal ,.modal_new {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content ,.modal_new-content{
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 80%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    /* The Close Button */
+    .close, .close_new{
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,.close_new:hover,
+    .close:focus,.close_new:focus{
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-header ,.modal_new-header{
+      padding: 2px 16px;
+      background-color: #5cb85c;
+      color: white;
+    }
+
+    .modal-body, .modal_new-body{padding: 2px 16px;}
+
+    .modal-footer, .modal_new_footer{
+      padding: 2px 16px;
+      background-color: #5cb85c;
+      color: white;
+    }
+
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="features.css" rel="stylesheet">
+
+      <style>
+        #chartdiv {
+          width: 95%;
+          height: 450px;
+          max-width: 100%;
+          background-color: #F5F5F5;
+          margin: 20px;
+          margin-left: 30px;
+        }
+        </style>
+  </head>
+<body>
+    <br>
+    <br>
+    <div class="container px-0 py-2" id="custom-cards5">
+      <h4 class="pb-3 border-bottom" style="color:white">Graphical representation of {{temp}} shares ..</h4>
+    </div>
+
+      <div style="margin: 30px">
+
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+          <script type="text/javascript">
+          new TradingView.widget(
+          {
+          "width": "100%",
+          "height": "510",
+          "symbol": "BSE:{{stock_name}}",
+          "interval": "D",
+          "timezone": "Asia/Kolkata",
+          "theme": "Dark",
+          "style": "2",
+          "locale": "in",
+          "toolbar_bg": "#f1f3f6",
+          "enable_publishing": false,
+          "allow_symbol_change": true,
+          "news": [
+            "headlines"
+          ],
+          "container_id": "tradingview_197fc"
+        }
+          );
+          </script>
+        </div>
+        <!-- TradingView Widget END -->
+        <br>
+      </div>
+        <div class="container px-0 py-3" id="custom-cards6">
+            <h4 class="pb-3 border-bottom" style="color:white">Predicting Stock Price for next 3 months using LSTM Algorithm ..</h4>
+        </div>
+        <!-- Resources -->
+        <script src="https://www.amcharts.com/lib/4/core.js"></script>
+        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+        <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+        <!-- Chart code -->
+        <script>
+        am4core.ready(function() {
+
+        // Themes begin
+        am4core.useTheme(am4themes_material);
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        // Create chart
+        var chart = am4core.create("chartdiv", am4charts.XYChart);
+        chart.padding(0, 15, 0, 15);
+
+        // Load external data
+        var jsonObject = JSON.parse('{{ predicted_result_df | escapejs}}');
+        chart.data = jsonObject
+
+        // the following line makes value axes to be arranged vertically.
+        chart.leftAxesContainer.layout = "vertical";
+
+        // uncomment this line if you want to change order of axes
+        //chart.bottomAxesContainer.reverseOrder = true;
+
+        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        dateAxis.renderer.grid.template.location = 0;
+        dateAxis.renderer.ticks.template.length = 8;
+        dateAxis.renderer.ticks.template.strokeOpacity = 0.1;
+        dateAxis.renderer.grid.template.disabled = true;
+        dateAxis.renderer.ticks.template.disabled = false;
+        dateAxis.renderer.ticks.template.strokeOpacity = 0.2;
+        dateAxis.renderer.minLabelPosition = 0.01;
+        dateAxis.renderer.maxLabelPosition = 0.99;
+        dateAxis.keepSelection = true;
+        dateAxis.minHeight = 10;
+
+        dateAxis.groupData = true;
+        dateAxis.minZoomCount = 5;
+
+        // these two lines makes the axis to be initially zoomed-in
+        // dateAxis.start = 0.7;
+        // dateAxis.keepSelection = true;
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.tooltip.disabled = true;
+        valueAxis.zIndex = 1;
+        valueAxis.renderer.baseGrid.disabled = true;
+        // height of axis
+        valueAxis.height = am4core.percent(65);
+
+        valueAxis.renderer.gridContainer.background.fill = am4core.color("#202020");
+        valueAxis.renderer.gridContainer.background.fillOpacity = 0.05;
+        valueAxis.renderer.inside = true;
+        valueAxis.renderer.labels.template.verticalCenter = "bottom";
+        valueAxis.renderer.labels.template.padding(2, 2, 2, 2);
+
+        //valueAxis.renderer.maxLabelPosition = 0.95;
+        valueAxis.renderer.fontSize = "0.8em"
+
+        var series = chart.series.push(new am4charts.LineSeries());
+        series.dataFields.dateX = "Date";
+        series.dataFields.valueY = "Close";
+        series.tooltipText = "{valueY.value}";
+        series.name = "MSFT: Value";
+        series.defaultState.transitionDuration = 0;
+
+        var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis2.tooltip.disabled = true;
+        // height of axis
+        valueAxis2.height = am4core.percent(35);
+        valueAxis2.zIndex = 3
+        // this makes gap between panels
+        valueAxis2.marginTop = 30;
+        valueAxis2.renderer.baseGrid.disabled = true;
+        valueAxis2.renderer.inside = true;
+        valueAxis2.renderer.labels.template.verticalCenter = "bottom";
+        valueAxis2.renderer.labels.template.padding(2, 2, 2, 2);
+        //valueAxis.renderer.maxLabelPosition = 0.95;
+        valueAxis2.renderer.fontSize = "0.8em"
+
+        valueAxis2.renderer.gridContainer.background.fill = am4core.color("#202020");
+        valueAxis2.renderer.gridContainer.background.fillOpacity = 0.05;
+
+
+        chart.cursor = new am4charts.XYCursor();
+
+        var scrollbarX = new am4charts.XYChartScrollbar();
+        scrollbarX.series.push(series);
+        scrollbarX.marginBottom = 20;
+        scrollbarX.scrollbarChart.xAxes.getIndex(0).minHeight = undefined;
+        chart.scrollbarX = scrollbarX;
+
+
+        /**
+         * Set up external controls
+         */
+
+        // Date format to be used in input fields
+        var inputFieldFormat = "yyyy-MM-dd";
+
+        document.getElementById("b1m").addEventListener("click", function() {
+          resetButtonClass();
+          var max = dateAxis.groupMax["day1"];
+          var date = new Date(max);
+          date.setMonth(date.getMonth() - 1);
+
+          dateAxis.zoomToDates(
+            date,
+            new Date(max)
+          );
+          //this.className = "amcharts-input amcharts-input-selected";
+        });
+
+        document.getElementById("b3m").addEventListener("click", function() {
+          resetButtonClass();
+          var max = dateAxis.groupMax["day1"];
+          var date = new Date(max);
+          date.setMonth(date.getMonth() - 3);
+
+          dateAxis.zoomToDates(
+            date,
+            new Date(max)
+          );
+          //this.className = "amcharts-input amcharts-input-selected";
+        });
+
+        document.getElementById("b6m").addEventListener("click", function() {
+          resetButtonClass();
+          var max = dateAxis.groupMax["day1"];
+          var date = new Date(max);
+          date.setMonth(date.getMonth() - 6);
+
+          dateAxis.zoomToDates(
+            date,
+            new Date(max)
+          );
+          //this.className = "amcharts-input amcharts-input-selected";
+        });
+
+        document.getElementById("b1y").addEventListener("click", function() {
+          resetButtonClass();
+          var max = dateAxis.groupMax["week1"];
+          var date = new Date(max);
+          date.setFullYear(date.getFullYear() - 1);
+
+          dateAxis.zoomToDates(
+            date,
+            new Date(max)
+          );
+          //this.className = "amcharts-input amcharts-input-selected";
+        });
+
+        document.getElementById("bytd").addEventListener("click", function() {
+          resetButtonClass();
+          var date = new Date(dateAxis.max);
+          date.setMonth(0, 1);
+          date.setHours(0, 0, 0, 0);
+          dateAxis.zoomToDates(date, new Date(dateAxis.max));
+          //this.className = "amcharts-input amcharts-input-selected";
+        });
+
+        document.getElementById("bmax").addEventListener("click", function() {
+          resetButtonClass();
+          dateAxis.zoom({start:0, end:1});
+          //this.className = "amcharts-input amcharts-input-selected";
+        });
+
+        function resetButtonClass() {
+          var selected = document.getElementsByClassName("amcharts-input-selected");
+          for(var i = 0; i < selected.length; i++) {
+            selected[i].className = "amcharts-input";
+          }
+        }
+
+        dateAxis.events.on("selectionextremeschanged", function() {
+          updateFields();
+        });
+
+        dateAxis.events.on("extremeschanged", updateFields);
+
+        function updateFields() {
+          var minZoomed = dateAxis.minZoomed + am4core.time.getDuration(dateAxis.mainBaseInterval.timeUnit, dateAxis.mainBaseInterval.count) * 0.5;
+          document.getElementById("fromfield").value = chart.dateFormatter.format(minZoomed, inputFieldFormat);
+          document.getElementById("tofield").value = chart.dateFormatter.format(new Date(dateAxis.maxZoomed), inputFieldFormat);
+        }
+
+        document.getElementById("fromfield").addEventListener("keyup", updateZoom);
+        document.getElementById("tofield").addEventListener("keyup", updateZoom);
+
+        var zoomTimeout;
+        function updateZoom() {
+          if (zoomTimeout) {
+            clearTimeout(zoomTimeout);
+          }
+          zoomTimeout = setTimeout(function() {
+            resetButtonClass();
+            var start = document.getElementById("fromfield").value;
+            var end = document.getElementById("tofield").value;
+            if ((start.length < inputFieldFormat.length) || (end.length < inputFieldFormat.length)) {
+              return;
+            }
+            var startDate = chart.dateFormatter.parse(start, inputFieldFormat);
+            var endDate = chart.dateFormatter.parse(end, inputFieldFormat);
+
+            if (startDate && endDate) {
+              dateAxis.zoomToDates(startDate, endDate);
+            }
+          }, 500);
+        }
+
+        }); // end am4core.ready()
+        </script>
+
+        <!-- HTML -->
+            <div id="controls" style="width: 100%; overflow: hidden;">
+            <div style="float: left; margin-left: 30px;">
+            <span style="font-size: 16px; font-weight: bold; color: white;"> FROM: </span> <input style="border-radius :5px; font-size: 16px; font-weight: bold;" type="text" id="fromfield" class="amcharts-input" />
+            <span style="font-size: 16px; font-weight: bold; color: white;"> TO: </span> <input style="border-radius :5px; font-size: 16px; font-weight: bold;" type="text" id="tofield" class="amcharts-input" />
+            </div>
+            <div style="float: right; margin-right: 35px;">
+            <button style="border: 1px solid black; font-weight: bold; border-radius: 5px;" id="b1m" class="amcharts-input">1m</button>
+            <button style="border: 1px solid black; font-weight: bold; border-radius: 5px;" id="b3m" class="amcharts-input">3m</button>
+            <button style="border: 1px solid black; font-weight: bold; border-radius: 5px;" id="b6m" class="amcharts-input">6m</button>
+            <button style="border: 1px solid black; font-weight: bold; border-radius: 5px;" id="b1y" class="amcharts-input">1y</button>
+            <button style="border: 1px solid black; font-weight: bold; border-radius: 5px;" id="bytd" class="amcharts-input">YTD</button>
+            <button style="border: 1px solid black; font-weight: bold; border-radius: 5px;" id="bmax" class="amcharts-input">MAX</button>
+            </div>
+            </div>
+        <div id="chartdiv"></div>
+        <br>
+
+    <form method="POST" action="/stock_detail/{{room_name}}/{{stock_name}}/">
+        {% csrf_token %}
+        <div style="text-align: center">
+            <button id="myBtn_new" class="btn btn-primary" style = "border-radius: 5px; margin-bottom: 5px; width: 400px; font-size: 18px; font-weight: bold; background: yellow; color: black">Return to Home Page</button>
+        </div>
+    </form>
+    <br>
+        <br>
+</body>
+</html>
