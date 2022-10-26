@@ -103,6 +103,90 @@
 }
     </style>
 
+    <!-- Custom styles for this template -->
+    <link href="features.css" rel="stylesheet">
+
+     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <style>
+
+    .card {
+    margin-top:10px;
+    }
+    body {
+        background-color: #FFCC99;
+    }
+    /* The Modal (background) */
+    .modal ,.modal_new {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content ,.modal_new-content{
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 80%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    /* The Close Button */
+    .close, .close_new{
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,.close_new:hover,
+    .close:focus,.close_new:focus{
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-header ,.modal_new-header{
+      padding: 2px 16px;
+      background-color: #5cb85c;
+      color: white;
+    }
+
+    .modal-body, .modal_new-body{padding: 2px 16px;}
+
+    .modal-footer, .modal_new_footer{
+      padding: 2px 16px;
+      background-color: #5cb85c;
+      color: white;
+    }
+
+    </style>
 
     <!-- Custom styles for this template -->
     <link href="features.css" rel="stylesheet">
@@ -128,38 +212,91 @@
               <b><h2 style="text-decoration: underline;
   text-decoration-thickness: auto; ">Portfolio</h2></b>
               </center>
-            {% for i in k %}
-              <div class="row">
-              <div class="col">
-                <h4>{{i.stock_name}}</h4>
-                <script>
-                  document.getElementById("profit").style.color = "blue";
-                  if(document.getElementById('money_inv').value>document.getElementById('curr_money').value){
-                    document.getElementById('profit').style.Color = '#5bc556';
-                      console.log('Green');
-                  }
-                  else {
-                       document.getElementById('profit').style.Color = '#5bc556';
-                       console.log('REd');
-                  }
-              </script>
-                <h6 >Profit/Loss:<span id="profit>">{{i.profit}}</span></h6>
-                <script>
-                  document.getElementById("profit").style.color = "blue";
-                  </script>
-                <h6 id="money_inv">Invested Price:{{i.old_price}}</h6>
-                <h6 id="curr_money">Current Price: {{i.Current_price}}</h6>
-                <h6 id="qty">Qty:{{i.no_of_shares}}</h6>
-              </div>
-              <div class="col">
+           <div class="row">
+            <div class="col">
+                {% for i in k %}
+                    <h4>{{i.stock_name}}</h4>
 
-              </div>
-              <div class="col">
-                <span><a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;margin:10px">Add</a>
-                  <a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;">Sell</a></span>
-              </div>
-            </div>
+                    <h6 >Profit/Loss:<span id="profit{{i.var}}>">{{i.profit}}</span></h6>
+                    <h6 id="money_inv{{i.var}}">Invested Price:{{i.old_price}}</h6>
+                    <h6 id="curr_money{{i.var}}">Current Price: {{i.Current_price}}</h6>
+                    <h6 id="qty{{i.var}}">Qty:{{i.no_of_shares}}</h6>
+<!--                <script>-->
+<!--                  if(document.getElementById('money_inv') > document.getElementById('curr_money')){-->
+<!--                    document.getElementById('profit').style.color = '#00FF00';-->
+<!--                      console.log('Green');-->
+<!--                  }-->
+<!--                  else {-->
+<!--                       document.getElementById('profit').style.color = '#FF0000';-->
+<!--                       console.log('Red');-->
+<!--                  }-->
+<!--                </script>-->
+
+<!--              <div class="col">-->
+<!--                <span><a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;margin:10px">Add</a>-->
+<!--                  <a class="btn btn-lg btn-primary" href="#" style="background-color:#3F00FF;padding:7px;">Sell</a></span>-->
+<!--              </div>-->
+            <div style = "text-align: center;">
+                <div style="width: auto; margin: 20px;">
+    <!--               <a href="/update/{{i.id}}" class="btn btn-primary" style="margin-right:10px;">Rate</a>-->
+                        <!-- Trigger/Open The Modal -->
+
+                        <!-- Trigger/Open The Modal -->
+    <!--                    <button id="myBtn_new{{i.var}}" class="btn_new{{i.var}}" style="background-color: yellow; font-weight: bold; font-size: 18px;-->
+    <!--                    color: black; border: 2px solid yellow; border-radius: 5px; width: 400px;height: 50px;">Sell </button>-->
+
+                        <!-- The Modal -->
+                        <form method="POST" action="/stock_detail/{{id}}/{{i.stock_nse}}/{{i.old_price}}/{{i.Current_price}}/{{i.no_of_shares}}/">
+                            {% csrf_token %}
+                            <div id="myModal_new{{i.var}}" class="modal_new{{i.var}}">
+
+                          <!-- Modal content -->
+                          <div class="modal_new-content" >
+                            <div class="modal_new-header">
+                              <h5 style="margin-top: 10px">Withdraw your invested amount</h5>
+    <!--                            <span class="close_new{{i.old_price}}">&times;</span>-->
+                            </div>
+                            <div class="modal_new-body" style="text-align: left;">
+                                <h6 style="margin-top: 10px;">Invested Stock Price : Rs.{{i.old_price}}</h6>
+
+                                <h6 style="margin-top: 15px;">Current Stock Price : Rs.{{i.Current_price}}</h6>
+
+                                <h6 style="margin-top: 15px;">Quantity(No.of shares you were holding) : {{i.no_of_shares}}</h6>
+
+    <!--                            <h6><label for = "quantity{{i.var}}"> Quantity (No.of shares you would like to withdraw) : </label>-->
+
+    <!--                            <input type = 'text' id = "quantity{{i.var}}" name = "quantity{{i.var}}" style="height: 30px; margin-top: 10px" value = "{{i.no_of_shares}}"></h6>-->
+
+    <!--                            <h6 style="display : inline-block; height: 30px; margin-top: 10px">Total amount to be getting invested : Rs. </h6>-->
+
+    <!--                            <a href = "javascript: void(0)" onclick="calc()"></a>-->
+    <!--                            <span><input type = "text" name = "output{{i.var}}" id = "output{{i.var}}" value = ""></span>-->
+
+    <!--                              <script>-->
+    <!--                                  $("#quantity{{i.var}}").keyup(function () {-->
+    <!--                                    $('#output{{i.var}}').val($("#quantity{{i.var}}").val() * {{i.Current_price}} );-->
+    <!--                                  });-->
+    <!--                              </script>-->
+
+                                <h6 style="display : inline-block; height: 30px; margin-top: 10px">Total amount to be getting withdrawed : Rs. {{i.sums}} </h6>
+
+                            </div>
+
+                            <div>
+                                <button id="myBtn_new" class="btn btn-primary" style =  "margin-bottom: 5px">Withdraw your Amount</button>
+                            </div>
+                            <div class="modal_new-footer">
+                            </div>
+                          </div>
+
+                        </div>
+                        </form>
+                    </div>
+                </div>
             {% endfor %}
+            </div>
+      </div>
+            </div>
           </div>
         </div>
       </div>
@@ -167,3 +304,32 @@
   </div>
 
   </main>
+  <script>
+// Get the modal
+var modal_new{{i.var}} = document.getElementById("myModal_new{{i.var}}");
+
+// Get the button that opens the modal
+var btn_new{{i.var}} = document.getElementById("myBtn_new{{i.var}}");
+
+// Get the <span> element that closes the modal
+var span_new{{i.var}} = document.getElementsByClassName("close_new{{i.var}}")[0];
+
+// When the user clicks the button, open the modal
+btn_new{{i.var}}.onclick = function() {
+  modal_new{{i.var}}.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span_new{{i.var}}.onclick = function() {
+  modal_new{{i.var}}.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal_new{{i.var}}) {
+    modal_new{{i.var}}.style.display = "none";
+  }
+}
+
+</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
