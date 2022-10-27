@@ -99,7 +99,7 @@
                             </div>
                             <div class="blog-content" onmouseover="mouseOn(this)" onmouseleave="mouseOff(this)">
                                 <div class="content-show">
-                                    <h4><a href="">{{ u.consultant_id.user.username }}</a></h4>
+                                    <h4><a href="{% url 'profile'  u.consultant_id.user.username  %}">{{ u.consultant_id.user.username }}</a></h4>
                                 </div>
                                 <div class="content-hide h">
                                     <p style="color: wheat;">{{ u.consultant_id.about_me }}</p>

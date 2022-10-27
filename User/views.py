@@ -1,4 +1,5 @@
-from ast import Constant
+from ast import Constant, Sub
+from ctypes import sizeof
 import re
 from django.shortcuts import render,redirect
 from User.forms import userForm,registerForm
@@ -6,10 +7,11 @@ from User.models import Consultant
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView,ListView
 from .forms import CreateBlogs
-from .models import Blogs
+from .models import Blogs,Subscribe
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.http import JsonResponse
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -58,6 +60,7 @@ def subscribe(request):
 @login_required
 def blog_list(request):
     b=Consultant.objects.all()
+    # b=Consl.objects.filter(reg_user=request.user.Profile)
     c=True
     print(b)
     return render(request,'User/blog_list.html',{'b':b})
@@ -86,3 +89,37 @@ class upvote(View):
         else:
             Blogs.objects.get(pk=r).upvotes.remove(request.user)
             return JsonResponse({'bool':False})
+
+    
+def profile(request,user):
+    u=User.objects.get(username=user)
+    p=Consultant.objects.filter(consultant_id=u.Profile)
+    
+    if len(p)>=1:
+        p=Blogs.objects.filter(author=u.Profile.Consultant).order_by('-upvotes')[:3]
+        o=Subscribe.objects.filter(reg_user=request.user.Profile,reg_consultant=u.Profile.Consultant)
+        b=True
+        if len(o)>=1:
+            b=False
+        return render(request,'User/profile.html',{'user':u,'post':p,'bool':b})
+    else:
+        return redirect('main')
+
+
+def addSubscriber(request):
+    r=request.POST['blog']
+    check=request.POST['check']
+    print(check)
+    if check == "1":
+        s=Subscribe(reg_user=request.user.Profile,reg_consultant=Consultant.objects.get(pk=r))
+        s.save()
+    else:
+        h=Subscribe.objects.get(reg_user=request.user.Profile,reg_consultant=Consultant.objects.get(pk=r))
+        h.delete()
+    # e=Subscribe.objects.get(reg_consultant=Consultant.objects.get(pk=r))
+    # for u in e:
+    #     if u.reg_user.username==request.user.username:
+    #         Subscribe.objects.get(reg_consultant=Consultant.objects.get(pk=r))
+    
+    return JsonResponse({'bool':True})
+    

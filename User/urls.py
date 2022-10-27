@@ -14,5 +14,7 @@ urlpatterns=[
     path('login/',auth_views.LoginView.as_view(template_name='User/login.html'),name='login'),
     path('logout/',auth_views.LogoutView.as_view(template_name='User/logout.html'),name='logout'),
     path('blogs/',blog_list,name='blog_list'),
-     path('upvote/',upvote.as_view(),name='upvote'),
+    path('upvote/',upvote.as_view(),name='upvote'),
+    path('profile/<user>',profile,name='profile'),
+    path('addSubscriber/',addSubscriber,name='addSubscriber'),
 ]

@@ -1,0 +1,121 @@
+{% extends 'User/base.html' %}
+{% load static %}
+
+
+{% block css %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'User/css/profile.css' %}?{% now "U" %}">
+{% endblock css %}
+
+
+{% block content %}
+<div class="container outer">
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" height="150px" width="150px" 
+                src="/media/{{ user.Profile.image_field }}">
+            <br>
+            <span class="font-weight-bold" style="font-weight: bold;">{{ user.username }}</span>
+            <br>
+            <span class="text-black-50" style="font-weight: bold;">{{ user.email }}</span>
+            <br>
+            {% if bool %}
+            <button class="btn btn-danger subs" data-blog="{{ user.Profile.Consultant.id }}">Subscribe</button>
+            {% else %}
+            <button class="btn btn-info subs" data-blog="{{ user.Profile.Consultant.id }}">Unsubscribe</button>
+            {% endif %}
+
+        </div>
+        </div>
+        <div class="col-md-9 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">About Me</h4>
+                </div>
+                <div class="row mt-2">
+                    <label class="text-muted" style="font-weight: bold;">{{ user.Profile.about_me }}</label>
+                </div>
+                <hr>
+                {% if post.all %}
+                <div class="row mt-3" style="height: 100vh;overflow-y: scroll;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Myy Top Blogs</h4>
+                    </div>
+                    <div style="text-align: center;border:1px solid black;">
+                        {% for p in post.all %}
+                            <h3>{{ p.title }}</h3>
+                            <div>{{ p.blogs|safe }}</div>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% else %}
+                <div class="row mt-3" style="overflow-y:scroll;">
+                    <div style="text-align:center">
+                        <h1>Sry, No blogs yet posted by Consultant</h1>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block js %}
+     <script>
+         $(document).ready(function(){
+             $('.subs').on('click',function(){
+            //   console.log($('.subs').data('b'));
+                 var q=$('.subs').text();
+                 var e=$('.subs').data('blog');
+                 var check=0;
+                 if(q=="Subscribe"){
+                    check=1;
+                 }
+
+                //  console.log(check);
+                 $.ajax({
+                     type: "post",
+                     url: "{% url 'addSubscriber' %}",
+                     data: {
+                         blog:e,
+                         check:check,
+                         csrfmiddlewaretoken:"{{csrf_token}}",
+                     },
+                     dataType: "json",
+                     success: function (response) {
+                         console.log(response.bool);
+                         if(response.bool==true){
+                            var e1=$('.subs').text();
+                            console.log(e1)
+                            if(e1==="Subscribe"){
+                                console.log("First");
+                                $('.subs').text("Unsubscribe");
+                                $('.subs').attr('data-b',0);
+                            }
+                            else{
+                                console.log("Second");
+                                $('.subs').text("Subscribe");
+                                $('.subs').attr('data-b',1);
+                            }
+                         }
+                        //  else{
+                        //     console.log(response);
+                        //     var e1=$('.'+e+'.upvotes').text();
+                        //     let r=parseInt(e1);
+                        //     console.log(e1);
+                        //     r--;
+                        //     $('.'+e+'.upvotes').text(r);
+                        //  }
+                     }
+                 });
+             })
+         });
+    </script>
+
+{% endblock %}
