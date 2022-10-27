@@ -5,7 +5,12 @@ class CreateForm(forms.ModelForm):
     class Meta:
         model=Room
         widgets = {
-            'starts_in': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control time'}),
-            'ends_in': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control time'}),
+            'desc': forms.Textarea(
+            attrs={'placeholder': 'Enter description here'}),
+            'end_in' :forms.DateField(
+                widget=forms.TextInput(
+                    attrs={'type': 'date'}
+    )
+            ),
         }
         exclude=('reg_user',)

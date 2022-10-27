@@ -1,8 +1,12 @@
 from django.shortcuts import render,redirect
 from nsetools import Nse
+import json
+from django.http import JsonResponse
 from .models import Room, Buy, Join, Stock, Profile, Consultant, Subscribe
 from django.shortcuts import render, redirect, get_object_or_404
 import ast
+from bs4 import BeautifulSoup as BS
+import requests as req
 from operator import itemgetter
 from .models import Stock,Buy,Room, Join
 from User.models import Profile,Subscribe,Consultant
@@ -37,11 +41,9 @@ def Create_team(request):
             return redirect('show',p.pk)
         else:
             print(form.errors)
-            print("Cutie")
             return render(request, 'Stock_Game/form.html', {'form': form})
     else:
         form = CreateForm()
-        print("Bhaadme jaa")
         return render(request, 'Stock_Game/form.html', {'form': CreateForm})
 def shownum(request,team_hel):
     param={'hex':hex(int(team_hel))}
@@ -183,7 +185,7 @@ def portfolio(request,team_name):
         k.append(k2)
 
     print('Hello')
-    param={'k':k,'money_left':(init-inv),'Profit':(init-inv+sums),'Initial':init,'name':name,'id':id1}
+    param={'k':k,'money_left':(init-inv),'Profit':(sums-inv),'Initial':init,'name':name,'id':id1}
     print(param)
     return render(request, 'Stock_Game/portfolio.html',param)
 
@@ -198,16 +200,32 @@ def stockers(request,stock):
 def stock_details(request,room_name,stock_name):
     nse = Nse()
     quote = nse.get_quote(stock_name),
+    url = "https://www.google.com/finance/quote/RELIANCE:NSE?hl=en"
+    purl = url[0:37] + stock_name + url[45:]
 
+    webpage = req.get(purl)  # YOU CAN EVEN DIRECTLY PASTE THE URL IN THIS
+    # HERE HTML PARSER IS ACTUALLY THE WHOLE HTML PAGE
+    trav = BS(webpage.content, "html.parser")
+
+    # TO GET THE TPYE OF CLASS
+    # HERE 'a' STANDS FOR ANCHOR TAG IN WHICH NEWS IS STORED
+    p=trav.find_all('div')
+    p1=p[210].string
+    print(p1)
+
+    for i in range(len(p1)):
+        if(p1[i]==','):
+            p1=p1[0:i]+p1[i+1:]
+    h=float(p1[1:])
     x = Room.objects.filter(id=room_name)
-    x = x[0].room_name
+    x = x[0].id
     print(room_name)
 
     context = {
         'room_id': room_name,
         'room_name': x,
         'stock_name': stock_name,
-        'current_stock_price': quote[0]['open'],
+        'current_stock_price': h,
     }
 
     p = Profile.objects.filter(user = request.user)[0]
@@ -226,6 +244,22 @@ def stock_details(request,room_name,stock_name):
     context['temp'] = x
 
     return render(request, 'Stock_Game/stock_details.html', context)
+def getval(request,stock):
+    url = "https://www.google.com/finance/quote/RELIANCE:NSE?hl=en"
+    purl=url[0:37]+stock+url[45:]
+    webpage = req.get(purl)  # YOU CAN EVEN DIRECTLY PASTE THE URL IN THIS
+    # HERE HTML PARSER IS ACTUALLY THE WHOLE HTML PAGE
+    trav = BS(webpage.content, "html.parser")
+
+    # TO GET THE TPYE OF CLASS
+    # HERE 'a' STANDS FOR ANCHOR TAG IN WHICH NEWS IS STORED
+    p = trav.find_all('div')
+    h = int(p[210][1:].string)
+    print(h)
+    contem = {
+        'code': h,
+    }
+    return JsonResponse(contem)
 
 def push_details(request, room_name, stock_name, current_stock_price):
     request.session['POSTVALUES'] = request.POST.copy(),
