@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView,ListView
 from .forms import CreateBlogs
 from .models import Blogs
+from Stock_Game.models import Join,Room
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.http import JsonResponse
@@ -24,6 +25,9 @@ def register(request):
             r1.user=u1
             c=r1.save()
             # print(c)
+            r2=Room.objects.filter(id=1)
+            p=Join(reg_user_id=r1,room=r2[0],user_money=10000)
+            p.save()
             # print(u1)
             if r.cleaned_data['consultant']:
                 g=Consultant(consultant_id=u1.Profile,consultant_name=u1.username)

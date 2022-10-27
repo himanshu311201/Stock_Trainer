@@ -4,8 +4,8 @@ from User.models import Profile, Consultant, Subscribe
 class Room(models.Model):
     reg_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     room_name = models.CharField(max_length=30)
-    starts_in = models.TimeField()
-    ends_in = models.TimeField()
+    desc=models.CharField(max_length=100)
+    ends_in = models.DateField()
     room_money = models.IntegerField()
 
     def __str__(self):
