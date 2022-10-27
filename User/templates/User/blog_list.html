@@ -10,19 +10,25 @@
 
 
 {% block content %}
+<!-- {{request.user.Profile.Consultant}} -->
 <nav class="navbar navbar-expand-lg bg-light container-fluid">
     <div class="row container-fluid">
-        <div class="nav-item col-4" style="text-align: center;">
+        <div class="nav-item col-3" style="text-align: center;">
           <b><a class="nav-link active" aria-current="page" href="{% url 'main' %}" style="color: orange ; font-size:x-large">Home</a></b>
         </div>
-        <div class="brand col-4"  style="text-align: center;">
+        <div class="brand col-3"  style="text-align: center;">
           <b><a class="navbar-brand" href="" style="color: orange;">Stocker</a></b>
         </div>
-        <form class="col-4" role="search"  style="text-align: center;">
+        <div class="brand col-3"  style="text-align: center;">
+          <b><a class="navbar-brand" href="{% url 'subscribe' %}" style="color: orange;">Add a Subscription?</a></b>
+        </div>
+        {% if request.user.Profile.consultant %}
+        <form class="col-3" role="search"  style="text-align: center;">
           <div class="nav-item mr-5">
             <a class="btn" href="{% url 'create-blog' %}" style="background-color:orange ; color:white">Make a blog</a>
           </div>
         </form>
+        {% endif %}
         
       <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
