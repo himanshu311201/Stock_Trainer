@@ -64,11 +64,14 @@ def subscribe(request):
 
 @login_required
 def blog_list(request):
-    b=Consultant.objects.all()
+    s=Subscribe.objects.filter(reg_user=request.user.Profile)
+    list=[]
+    for u in s:
+        list.append(u.reg_consultant)
     # b=Consl.objects.filter(reg_user=request.user.Profile)
     c=True
-    print(b)
-    return render(request,'User/blog_list.html',{'b':b})
+    # print(b)
+    return render(request,'User/blog_list.html',{'b':list})
 
 
 
