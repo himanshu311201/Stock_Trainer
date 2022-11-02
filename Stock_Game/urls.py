@@ -18,5 +18,5 @@ urlpatterns =[
     path('stock_details/<room_name>/<stock_name>/<current_stock_price>/<no_of_shares>/', views.pull_details, name='pull_details'),
     path('stock_detail/<room_name>/<stock_name>/<current_stock_price>/<no_of_shares>/pred/', views.predict, name='predict'),
     path('stock_detail/<room_name>/<stock_name>/<invested_stock_price>/<current_stock_price>/<no_of_shares>/', views.portfolio_pull, name='portfolio_pull'),
-
+    path('port_push/<room_name>/<stock_name>/<invested_stock_price>/<current_stock_price>/<no_of_shares>/<var>/', views.port_push, name='port_push'),
 ]

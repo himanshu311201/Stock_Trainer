@@ -160,7 +160,7 @@
   {% for i in room %}
     <tr style="font-size:20px;">
       <th scope="row" >{{i.room.room_name}}</th>
-      <td><a class="btn btn-lg btn-primary" href="/portfolio/{{i.id}}/" style="padding:3px;font-size:15px;">View Detail</a></td>
+      <td><a class="btn btn-lg btn-primary" href="/portfolio/{{i.room.id}}/" style="padding:3px;font-size:15px;">View Detail</a></td>
     </tr>
    <center>
   <form method="POST" action="/join/">
@@ -191,8 +191,12 @@
   {% endfor %}
   </tbody>
 </table>
-              <span><a class="btn btn-lg btn-primary" href="/createform/" style="padding:5px;margin:20px">Create Team</a>
-            <a class="btn btn-lg btn-primary" id="myBtn" style="padding:5px;">Join Team</a></span>
+              <div><center>
+                  <a class="btn btn-lg btn-primary" href="/createform/" style="padding:5px;margin:20px">Create Team</a>
+                  <a class="btn btn-lg btn-primary" id="myBtn" style="padding:5px;">Join Team</a>
+              </center>
+                  </div>
+
           </div>
         </div>
       </div>

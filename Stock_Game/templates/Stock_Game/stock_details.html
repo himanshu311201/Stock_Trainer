@@ -110,11 +110,6 @@
 
     <title>Carousel Template for Bootstrap</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
       <style>
           #custom-cards{
@@ -258,26 +253,25 @@
         </div>
     </nav>
   <main>
-    <div class="container px-0" style="padding-top: 60px; padding-bottom: 20px; " id="custom-cards">
+    <div class="container px-0" style="padding-bottom: 20px; " id="custom-cards">
       <h4 class="pb-3 border-bottom" style="color:white">Welcome, {{request.user}} to the Room {{room_name}}</h4>
     </div>
     <div class="container px-0 py-2" id="custom-cards1">
       <h4 style="color:white">Room Name : {{room_name}}</h4>
     </div>
     <div class="container px-0 py-2" id="custom-cards2">
-        <h4 style="color:white">Stock Name :{{temp}}<span id="ca">{{stock_name}}</span></h4>
+        <h4 style="color:white">Stock Name : {{temp}} <span id="ca">{{stock_name}}</span></h4>
     </div>
     <div class="container px-0 py-2" id="custom-cards3">
       <h4 style="color:white" >Current Stock Price : Rs.<span id="pen">{{current_stock_price}}</span></h4>
         <script>
        function getNewProduct() {
        console.log("HELOO");
-       if(document.getElementById("ca").innerText=="SBIN")
-        {
+       let w=document.getElementById("ca");
         $.ajax(
         {
             type: "GET",
-            url: '/getval/SBIN',
+            url: '/getval/'+w.innerText,
             cache: false,
             success: function (context) {
                 displayNewProduct(context);
@@ -285,34 +279,7 @@
 
         }
     );
-}
-else if($document.getElementById("ca").innerText=="RELIANCE")
-{
-    $.ajax(
-        {
-            type: "GET",
-            url: '/getval/SBIN',
-            cache: false,
-            success: function (context) {
-                displayNewProduct(context);
-            }
 
-        }
-    );
-}
-else{
-    $.ajax(
-        {
-            type: "GET",
-            url: '/getval/HDFCBANK',
-            cache: false,
-            success: function (context) {
-                displayNewProduct(context);
-            }
-
-        }
-    );
-}
 }
 function displayNewProduct(context) {
     if(context.code!=null)
@@ -335,8 +302,8 @@ setInterval(function(){
                     <!-- Trigger/Open The Modal -->
 
                     <!-- Trigger/Open The Modal -->
-                    <button id="myBtn" class="btn" style="background-color: yellow; font-weight: bold; font-size: 18px;
-                    color: black; border: 2px solid yellow; border-radius: 5px; width: 400px;height: 50px;">Buy Shares of {{temp}}</button>
+                    <button id="myBtn" class="btn" style="background-color: white; font-weight: bold; font-size: 18px;
+                    color: black; border: 2px solid white; border-radius: 5px; width: 400px;height: 50px;">Buy Shares of {{temp}}</button>
 
                     <!-- The Modal -->
                     <form method="POST" action="{{current_stock_price}}/">
@@ -355,12 +322,40 @@ setInterval(function(){
 
                             <h6><label for = "quantity"> Quantity (No.of shares you would like to purchase) : </label>
 
-                            <input type = 'text' id = "quantity" name = "quantity" style="height: 30px; margin-top: 10px"></h6>
+                            <input type = 'text' id = "quantity" name = "quantity" style="height: 30px; margin-top: 10px" onkeyup="calc()"></h6>
 
                             <h6 style="display : inline-block; height: 30px; margin-top: 10px">Total amount to be getting invested : Rs. </h6>
 
-                            <a href = "javascript: void(0)" onclick="calc()"></a>
                             <span><input type = "text" name = "output" id = "output" value = ""></span>
+
+                             <script>
+                                 function calc(){
+                                 a = document.getElementById('quantity').value
+                                 console.log(a)
+                                          if(a<0){
+                                                alert('Please enter valid number of shares to get invested')
+
+                                                $("#quantity").keyup(function () {
+                                                $('#output').val(0);
+                                                });
+                                          }
+                                          else{
+                                              var b = {{current_stock_price}}
+                                              console.log(a)
+                                              if((parseInt(a) * parseInt(b)) > {{room_balance}}){
+                                                    alert('You are exceeding the limit of room_balance')
+                                                    $('#output').val(0)
+                                              }
+                                              else{
+                                                $("#quantity").keyup(function () {
+                                                    $('#output').val($('#quantity').val() * {{current_stock_price}} );
+                                                }
+                                              );
+
+                                              }
+                                          }
+                                          }
+                                 </script>
                         </div>
                         <div>
                             <button id="myBtn1" class="btn btn-primary">Add your amount</button>
@@ -550,7 +545,7 @@ function drawCurveTypes() {
           <form method="POST" action="{{current_stock_price}}/{{no_of_shares}}/pred/">
           {% csrf_token %}
           <div>
-              <button id="myBtn_new2" class="btn btn-primary" style =  "margin-bottom: 5px; height: 50px; width: 380px; background: yellow; color: black; font-size: 18px; font-weight: bold;">Predict</button>
+              <button id="myBtn_new2" class="btn btn-primary" style =  "margin-bottom: 5px; height: 50px; width: 380px; background: white; color: black; font-size: 18px; font-weight: bold;">Predict</button>
           </div>
          </form>
       </span>
