@@ -69,16 +69,20 @@ def main_home(request):
         k1 = i
     init = room1[0].room_money
     teams = Join.objects.filter(room=k1)
+    print(teams)
     nse = Nse()
     Profile1 = Profile.objects.filter(user=request.user)
     room2 = Join.objects.filter(reg_user_id=Profile1[0])
+    print(room2)
     subs=Subscribe.objects.filter(reg_user=Profile1[0])
     buy2 = Buy.objects.filter(reg_user_id=Profile1[0]).filter(reg_room_id=1)
-    sum1=teams[0].user_money
-    sum2 = teams[0].user_money
+    sum1=room2[0].user_money
+    sum2 = room2[0].user_money
+    print(sum1)
     for j in buy2:
         quote = nse.get_quote(j.reg_stock_id.nse_code)
         sum1 += (quote['open'] * j.no_of_shares)
+    print(sum1)
     k3 = 1
     for i in teams:
         p = []
@@ -87,13 +91,12 @@ def main_home(request):
         sum = i.user_money
         k2 = -99999;
         for j in buy1:
-            print(j.reg_stock_id)
             quote = nse.get_quote(j.reg_stock_id.nse_code)
-            print(quote['open'])
             sum += (quote['open'] * j.no_of_shares)
         if sum>sum1:
             k3+=1
-    param={'rank':k3,'avail':sum2,'profit':(sum1-init),'room':room2,'subs':subs}
+    print(init)
+    param={'rank':k3,'avail':sum2,'profit':round(sum1-init, 2),'room':room2,'subs':subs}
     return render(request, 'Stock_Game/main.html',param)
 def stocks_list(request,team_name):
     nse = Nse()
@@ -125,14 +128,17 @@ def ranklist(request,team_name):
         p.append(i.reg_user_id.user.username)
         buy1=Buy.objects.filter(reg_user_id=i.reg_user_id).filter(reg_room_id=i.room)
         sum=i.user_money
+        print(i.user_money)
         k2=-99999;
         for j in buy1:
-            print(j.reg_stock_id)
             quote = nse.get_quote(j.reg_stock_id.nse_code)
-            print(quote['open'])
             if k2<quote['open']*j.no_of_shares:
                 p1=j.reg_stock_id.stock_name
             sum+=(quote['open']*j.no_of_shares)
+            print(quote['open'])
+            print(j.no_of_shares)
+
+            print(sum)
         p.append(int(sum))
         p.append(p1)
         k.append(p)
@@ -154,7 +160,6 @@ def ranklist(request,team_name):
 def portfolio(request,team_name):
     us=request.user
     nse = Nse()
-    print(team_name)
     Room1=Room.objects.filter(id=team_name)
     init=Room1[0].room_money
     name=Room1[0].room_name
@@ -166,6 +171,7 @@ def portfolio(request,team_name):
     k=[]
     sums=0
     inv=0
+    sum = 0
     var = 0
     for i in Buy1:
         sums = 0
@@ -174,20 +180,19 @@ def portfolio(request,team_name):
         k2['stock_name']=i.reg_stock_id.stock_name
         k2['no_of_shares']=i.no_of_shares
         quote = nse.get_quote(i.reg_stock_id.nse_code)
-        print(quote)
         k2['old_price']=i.current_stock_price
         k2['Current_price']=quote['open']
-        k2['profit'] = (quote['open']-i.current_stock_price) * i.no_of_shares
+        k2['profit'] = round((quote['open']-i.current_stock_price) * i.no_of_shares, 2)
+        sum = sum + (quote['open']) * i.no_of_shares
         sums = sums + (quote['open']) * i.no_of_shares
         inv = inv + i.current_stock_price * i.no_of_shares
+        print(inv)
         k2['sums'] = sums
         k2['var'] = var
         var = var + 1
         k.append(k2)
-
-    print('Hello')
-    param={'k':k,'money_left':(init-inv),'Profit':(sums-inv),'Initial':init,'name':name,'id':id1}
-    print(param)
+    print(init)
+    param={'k':k,'money_left':(init-inv),'Profit':round(sum-inv, 2),'Initial':init,'name':name,'id':id1}
     return render(request, 'Stock_Game/portfolio.html',param)
 
 # Create your views here.
@@ -222,7 +227,7 @@ def stock_details(request,room_name,stock_name):
         #         p1=p1[0:i]+p1[i+1:]
         h=float(p1[1:])
         x = Room.objects.filter(id=room_name)
-        x = x[0].id
+        x = x[0].room_name
         print(room_name)
 
         context = {
@@ -277,42 +282,47 @@ def getval(request,stock):
     return JsonResponse(contem)
 
 def push_details(request, room_name, stock_name, current_stock_price):
-    print("Mai hi hoon")
-    request.session['POSTVALUES'] = request.POST.copy(),
 
-    post_values = request.session.get('POSTVALUES')
-    print(post_values)
+    try:
+        # print("Mai hi hoon")
+        request.session['POSTVALUES'] = request.POST.copy(),
 
-    x = post_values[0]
-    no_of_share = x['quantity'],
-    total_amount = x['output'],
+        post_values = request.session.get('POSTVALUES')
+        # print(post_values)
 
-    pr = Profile.objects.filter(user=request.user)[0]
-    ro = Room.objects.filter(id=room_name)[0]
-    st = Stock.objects.filter(nse_code=stock_name)[0]
-    print(type(current_stock_price))
+        x = post_values[0]
+        no_of_share = x['quantity'],
+        total_amount = x['output'],
 
-    print(Join.objects.filter(reg_user_id=pr, room=ro))
-    imp = Join.objects.filter(reg_user_id=pr, room=ro)
+        pr = Profile.objects.filter(user=request.user)[0]
+        ro = Room.objects.filter(id=room_name)[0]
+        st = Stock.objects.filter(nse_code=stock_name)[0]
+        print(type(current_stock_price), current_stock_price)
 
-    upd = imp[0].user_money - float(total_amount[0])
-    print(upd)
+        imp = Join.objects.filter(reg_user_id=pr, room=ro)
 
-    if request.method == 'POST':
-        if(Buy.objects.filter(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=current_stock_price).exists()):
-            x = Buy.objects.get(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=current_stock_price)
-            x = x.no_of_shares
-            y = int(x) + int(no_of_share[0])
-            Buy.objects.filter(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=current_stock_price).update(no_of_shares=y)
+        upd = imp[0].user_money - float(total_amount[0])
+        print(upd)
 
-        else:
-            Buy.objects.create(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=current_stock_price, no_of_shares=no_of_share[0]),
+        if request.method == 'POST':
+            if(Buy.objects.filter(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=current_stock_price).exists()):
+                x = Buy.objects.get(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=current_stock_price)
+                x = x.no_of_shares
+                y = int(x) + int(no_of_share[0])
+                Buy.objects.filter(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=current_stock_price).update(no_of_shares=y)
 
-        Join.objects.filter(reg_user_id=pr, room=ro).update(user_money=upd)
+            else:
+                Buy.objects.create(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=current_stock_price, no_of_shares=no_of_share[0]),
 
+            Join.objects.filter(reg_user_id=pr, room=ro).update(user_money=upd),
 
-    x = '/portfolio/' + room_name + '/'
-    return redirect(to=x)
+        x = '/portfolio/' + room_name + '/'
+        return redirect(to=x)
+
+    except:
+        traceback.print_exc()
+        return redirect('push_details', room_name=room_name, stock_name=stock_name)
+
 
 
 def pull_details(request,room_name,stock_name,current_stock_price,no_of_shares):
@@ -389,6 +399,51 @@ def portfolio_pull(request,room_name,stock_name,invested_stock_price,current_sto
     Join.objects.filter(reg_user_id=pr, room=ro).update(user_money=upd)
 
     print(room_name, type(room_name))
+
+    x = '/portfolio/' + room_name + '/'
+    return redirect(to=x)
+
+def port_push(request,room_name,stock_name,invested_stock_price,current_stock_price,no_of_shares,var):
+
+    request.session['POSTVALUES'] = request.POST.copy(),
+
+    post_values = request.session.get('POSTVALUES')[0],
+    print(post_values),
+
+    m = 'quantity' + str(var)
+    n = 'output' + str(var)
+
+    x = post_values[0]
+    no_of_share = x[m],
+    total_amount = x[n],
+    print(no_of_share, total_amount)
+    m,n = int(no_of_share[0]), float(total_amount[0])
+
+    pr = Profile.objects.filter(user=request.user)[0]
+    ro = Room.objects.filter(id=room_name)[0]
+    st = Stock.objects.filter(nse_code=stock_name)[0]
+    print(type(current_stock_price))
+
+    print(m,n)
+    print(Join.objects.filter(reg_user_id=pr, room=ro))
+    imp = Join.objects.filter(reg_user_id=pr, room=ro)
+
+    upd = imp[0].user_money + n,
+    upd = upd[0]
+    print(upd)
+    print(pr,ro,st,current_stock_price,no_of_shares)
+    if request.method == 'POST':
+        if(Buy.objects.filter(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=invested_stock_price,no_of_shares=no_of_shares).exists()):
+            x = Buy.objects.get(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=invested_stock_price)
+            x = x.no_of_shares
+            if(int(x) == m):
+                Buy.objects.get(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st,
+                                current_stock_price=invested_stock_price, no_of_shares=no_of_shares).delete(),
+            else:
+                y = int(x) - m
+                Buy.objects.filter(reg_user_id=pr, reg_room_id=ro, reg_stock_id=st, current_stock_price=invested_stock_price).update(no_of_shares=y)
+
+    Join.objects.filter(reg_user_id=pr, room=ro).update(user_money=upd)
 
     x = '/portfolio/' + room_name + '/'
     return redirect(to=x)
