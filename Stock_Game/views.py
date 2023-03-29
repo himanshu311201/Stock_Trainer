@@ -61,8 +61,8 @@ def join(request):
             post.room = pol
             post.user_money = pol.room_money
             post.save()
-            return redirect('home')
-    return redirect('home')
+            return redirect('main')
+    return redirect('main')
 def main_home(request):
     room1 = Room.objects.filter(id=1)
     for i in room1:
@@ -204,80 +204,38 @@ def stockers(request,stock):
     return render(request, 'Stock_Game/stocker.html',param)
 
 def stock_details(request,room_name,stock_name):
-    try:
-        nse = Nse()
-        quote = nse.get_quote(stock_name),
-        url = "https://www.google.com/finance/quote/RELIANCE:NSE?hl=en"
-        purl = url[0:37] + stock_name + url[45:]
+    nse = Nse()
+    quote = nse.get_quote(stock_name)
+    x = Room.objects.filter(id=room_name)
+    x = x[0].room_name
+    print(room_name)
 
-        webpage = req.get(purl)  # YOU CAN EVEN DIRECTLY PASTE THE URL IN THIS
-        # HERE HTML PARSER IS ACTUALLY THE WHOLE HTML PAGE
-        trav = BS(webpage.content, "html.parser")
+    context = {
+        'room_id': room_name,
+        'room_name': x,
+        'stock_name': stock_name,
+        'current_stock_price': quote['open'],
+    }
+    p = Profile.objects.filter(user = request.user)[0]
+    room_b = Join.objects.filter(reg_user_id = p, room = room_name)
+    context['room_balance'] = room_b[0].user_money
+    context['no_of_shares'] = 0;
+    print(p, x, int(room_name), stock_name)
+    x = Stock.objects.filter(nse_code = stock_name)[0].stock_name
+    context['temp'] = x
+    return render(request, 'Stock_Game/stock_details.html', context)
 
-        # TO GET THE TPYE OF CLASS
-        # HERE 'a' STANDS FOR ANCHOR TAG IN WHICH NEWS IS STORED
-        p=trav.find_all('div')
-        p1=p[210].string
-        p1 = p1.replace(',', '')
-        print(p1)
-        i=0
-        # for i in range(len(p1)-i):
-        #     if(p1[i]==','):
-        #         i=i+1
-        #         p1=p1[0:i]+p1[i+1:]
-        h=float(p1[1:])
-        x = Room.objects.filter(id=room_name)
-        x = x[0].room_name
-        print(room_name)
-
-        context = {
-            'room_id': room_name,
-            'room_name': x,
-            'stock_name': stock_name,
-            'current_stock_price': h,
-        }
-
-        p = Profile.objects.filter(user = request.user)[0]
-        print(p)
-        room_b = Join.objects.filter(reg_user_id = p, room = room_name)
-        context['room_balance'] = room_b[0].user_money
-
-        context['no_of_shares'] = 0;
-        print(p, x, int(room_name), stock_name)
-        # s = Stock.objects.filter(nse_code = stock_name)[0]
-        # sell = Buy.objects.filter(reg_user_id = p, reg_room_id = room_name, reg_stock_id = s)
-        # print(sell)
-        # context['no_of_shares'] = sell[0].no_of_shares;
-
-        x = Stock.objects.filter(nse_code = stock_name)[0].stock_name
-        context['temp'] = x
-
-        return render(request, 'Stock_Game/stock_details.html', context)
-    except:
-        traceback.print_exc()
-        return redirect('stock_details',room_name=room_name,stock_name=stock_name)
 
 
 
 def getval(request,stock):
-    url = "https://www.google.com/finance/quote/RELIANCE:NSE?hl=en"
-    purl=url[0:37]+stock+url[45:]
-    webpage = req.get(purl)  # YOU CAN EVEN DIRECTLY PASTE THE URL IN THIS
-    # HERE HTML PARSER IS ACTUALLY THE WHOLE HTML PAGE
-    trav = BS(webpage.content, "html.parser")
 
     # TO GET THE TPYE OF CLASS
     # HERE 'a' STANDS FOR ANCHOR TAG IN WHICH NEWS IS STORED
-    p=trav.find_all('div')
-    p1=p[210].string
-    print(p1)
-
-    for i in range(len(p1)):
-        if(p1[i]==','):
-            p1=p1[0:i]+p1[i+1:]
-    h=float(p1[1:])
+    nse = Nse()
+    quote = nse.get_quote(stock)
     contem = {
-        'code': h,
+        'code': quote['open'],
     }
     return JsonResponse(contem)
 
@@ -364,6 +322,7 @@ def predict(request,room_name,stock_name,current_stock_price,no_of_shares):
     context["predicted_result_df"] = predicted_result_df
 
     x = Stock.objects.filter(nse_code=stock_name)[0].stock_name
+    print(room_name)
     context['room_name'] = room_name
     context['temp'] = x
     context['stock_name'] = stock_name

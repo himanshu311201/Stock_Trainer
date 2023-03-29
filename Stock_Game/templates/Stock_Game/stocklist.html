@@ -1,5 +1,5 @@
 {% load static %}
-
+{% extends 'Stock_Game/nav.html' %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -112,10 +112,21 @@
   <body>
   <nav class="navbar navbar-light navPad" style="background-color: #377dc34d">
         <div class="container-fluid">
-            <a href="/" class="navbar-brand logoPad hh66Heading" style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue;" style="width: 148px;height: 40px;">Stock Trainer</a>
-            <span style="font-size:20px;color:white;padding-right: 40px;">Welcome,{{request.user}}</span>
+            <a href="/" style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue;" class="navbar-brand logoPad hh66Heading" style="width: 148px;height: 40px;">Stock Trainer</a>
+            <div style="padding-top: 5px">
+                <img style="margin-right: 5px" src="{% static 'Stock_Game/images/hi5.jpg' %}" alt="Avatar" class="avatar">
+                <a style="font-size:18px; color:white; padding-right:40px; padding-top: 5px; margin-top: 5px">Welcome, {{request.user}}</a>
+                <a href="/user/logout" style="font-size:18px; color:white; padding-right:40px; text-decoration: none;" onclick="logout()">logout</a>
+            </div>
+            <script>
+                    function logout(){
+                    alert('You have logged out successfully')
+                    }
+                </script>
+
+
         </div>
-    </nav>
+        </nav>
   <main>
 	    <div class="container px-4" id="custom-cards">
     <h2 class="pb-2 border-bottom" style="color:white">Team: GLOBAL</h2>

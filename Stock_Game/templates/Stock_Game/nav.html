@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.104.2">
+
+    <style>
+      .avatar {
+         vertical-align: middle;
+         width: 30px;
+         height: 30px;
+         border-radius: 50%;
+       }
+    </style>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
+
+    <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+</html>
+<body>
+    <nav class="navbar navbar-light navPad" style="background-color: #377dc34d">
+        <div class="container-fluid">
+            <a href="/" style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue;" class="navbar-brand logoPad hh66Heading" style="width: 148px;height: 40px;">Stock Trainer</a>
+            <div style="padding-top: 5px">
+                <img style="margin-right: 5px" src="{% static 'Stock_Game/images/hi5.jpg' %}" alt="Avatar" class="avatar">
+                <a style="font-size:18px; color:white; padding-right:40px; padding-top: 5px; margin-top: 5px">Welcome, {{request.user}}</a>
+                <a href="/user/logout" style="font-size:18px; color:white; padding-right:40px; text-decoration: none;" onclick="logout()">logout</a>
+            </div>
+            <script>
+                    function logout(){
+                    alert('You have logged out successfully')
+                    }
+                </script>
+        </div>
+        </nav>
+</body>
