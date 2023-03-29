@@ -6,39 +6,37 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{% static 'User/css/templatemo_style.css' %}?{% now "U" %}">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+      .avatar {
+         vertical-align: middle;
+         width: 30px;
+         height: 30px;
+         border-radius: 50%;
+       }
+    </style>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
+
+    <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 {% endblock css %}
 
 
 {% block content %}
-<div id="main-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="logo">
-                    <h3 style="color: orange;">Stocker</h3>
-                </div>
+    <nav class="navbar navbar-light navPad" style="background-color: #1F51FF">
+        <div class="container-fluid">
+            <a href="/main" style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue;" class="navbar-brand logoPad hh66Heading" style="width: 148px;height: 40px;">Stock Trainer</a>
+            <div style="padding-top: 5px">
+                <img style="margin-right: 5px" src="{% static 'Stock_Game/images/hi5.jpg' %}" alt="Avatar" class="avatar">
+                <a style="font-size:18px; color:white; padding-right:40px; padding-top: 5px; margin-top: 5px">Welcome, {{request.user}}</a>
+                <a href="/user/logout" style="font-size:18px; color:white; padding-right:40px; text-decoration: none;" onclick="logout()">logout</a>
             </div>
-            <div class="col-md-6">
-                <div class="main-menu">
-                    <ul>
-                        <li><a href="{% url 'main' %}">Home</a></li>
-                        <li><a href="{% url 'home' %}">About</a></li>
-                        <li><a href="contact-us.html">Contact</a></li>
-                        <li><a href="contact-us.html" style="color: orange;">Welcome,  {{ request.user.username }}</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="search-box">  
-                    <form name="search_form" method="get" class="search_form">
-                        <input id="search" type="text" />
-                        <input type="submit" id="search-button" />
-                    </form>
-                </div>
-            </div>
+            <script>
+                    function logout(){
+                    alert('You have logged out successfully')
+                    }
+                </script>
         </div>
-    </div>
+        </nav>
 </div>
 
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">

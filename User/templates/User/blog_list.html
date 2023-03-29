@@ -5,54 +5,42 @@
 {% block css %}
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'User/css/blog_list.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'User/css/blog_list.css' %}?{% now "U" %}">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
+
+    <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
 {% endblock css %}
 
 
 {% block content %}
 <!-- {{request.user.Profile.Consultant}} -->
-<nav class="navbar navbar-expand-lg bg-light container-fluid">
-    <div class="row container-fluid">
-        <div class="nav-item col-3" style="text-align: center;">
-          <b><a class="nav-link active" aria-current="page" href="{% url 'main' %}" style="color: orange ; font-size:x-large">Home</a></b>
+<nav class="navbar navPad" style="background-color: transparent">
+        <div class="container-fluid">
+            <a href="/main" style="padding-left: 20px; margin-left: 20px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue;" class="navbar-brand logoPad hh66Heading">Stock Trainer</a>
+            <div style="padding-top: 5px">
+                <a class="navbar-brand" href="{% url 'subscribe' %}" style="text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue; font-size:18px; color:white; padding-right:40px; padding-top: 5px; margin-top: 5px">Add a Subscription ?</a>
+                {% if request.user.Profile.consultant %}
+                <form class="col-3" role="search"  style="text-align: center;">
+                  <div class="nav-item mr-5">
+                    <a class="btn" href="{% url 'create-blog' %}" style="font-size:18px; color:white; padding-right:40px; padding-top: 5px; margin-top: 5px">Make a blog</a>
+                  </div>
+                </form>
+                {% endif %}
+<!--                <span>-->
+<!--                    <img style="margin-right: 5px; vertical-align: middle; width: 30px; height: 30px; border-radius: 50%;" src="{% static 'Stock_Game/images/hi5.jpg' %}" alt="Avatar" class="avatar">-->
+<!--                </span>-->
+                <a style="text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue; font-size:18px; color:white; padding-right:40px; padding-top: 5px; margin-top: 5px">Welcome, {{request.user}}</a>
+                <a href="/user/logout" style="font-size:18px; color:white; padding-right:40px; text-decoration: none; text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue;" onclick="logout()">logout</a>
+            </div>
+            <script>
+                    function logout(){
+                    alert('You have logged out successfully')
+                    }
+                </script>
         </div>
-        <div class="brand col-3"  style="text-align: center;">
-          <b><a class="navbar-brand" href="" style="color: orange;">Stocker</a></b>
-        </div>
-        <div class="brand col-3"  style="text-align: center;">
-          <b><a class="navbar-brand" href="{% url 'subscribe' %}" style="color: orange;">Add a Subscription?</a></b>
-        </div>
-        {% if request.user.Profile.consultant %}
-        <form class="col-3" role="search"  style="text-align: center;">
-          <div class="nav-item mr-5">
-            <a class="btn" href="{% url 'create-blog' %}" style="background-color:orange ; color:white">Make a blog</a>
-          </div>
-        </form>
-        {% endif %}
-        
-      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'main' %}">Home</a>
-          </li>
-         
-        </ul>
-        <div class="brand">
-            <a class="navbar-brand" href="">Stocker</a>
-        </div>
-
-        <form class="d-flex" role="search">
-          <div class="nav-item mr-5">
-            <a class="btn" href="{% url 'create-blog' %}" style="background-color:orange ;">Make a blog</a>
-          </div>
-        </form>
-      </div> -->
-    </div>
-  </nav>
+        </nav>
+<hr style="color: white; margin: 0px;">
 <div class="outer">
     <div class="inner">
         <br>
@@ -77,9 +65,9 @@
             {% empty %}
                 <div>
                     <h1>Sry,no blogs</h1>
-                </div> 
-            {% endfor %} 
-            
+                </div>
+            {% endfor %}
+
     </div>
 </div>
 {% endblock %}

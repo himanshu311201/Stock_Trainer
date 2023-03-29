@@ -6,10 +6,37 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'User/css/profile.css' %}?{% now "U" %}">
+<style>
+      .avatar {
+         vertical-align: middle;
+         width: 30px;
+         height: 30px;
+         border-radius: 50%;
+       }
+    </style>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
+
+    <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
 {% endblock css %}
 
 
 {% block content %}
+<nav class="navbar navbar-light navPad" style="background-color: #377dc34d">
+        <div class="container-fluid">
+            <a href="/main" style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue;" class="navbar-brand logoPad hh66Heading" style="width: 148px;height: 40px;">Stock Trainer</a>
+            <div style="padding-top: 5px">
+                <img style="margin-right: 5px" src="{% static 'Stock_Game/images/hi5.jpg' %}" alt="Avatar" class="avatar">
+                <a style="font-size:18px; color:white; padding-right:40px; padding-top: 5px; margin-top: 5px">Welcome, {{request.user}}</a>
+                <a href="/user/logout" style="font-size:18px; color:white; padding-right:40px; text-decoration: none;" onclick="logout()">logout</a>
+            </div>
+            <script>
+                    function logout(){
+                    alert('You have logged out successfully')
+                    }
+                </script>
+        </div>
+        </nav>
 <div class="container outer">
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
@@ -39,11 +66,12 @@
                 </div>
                 <hr>
                 {% if post.all %}
-                <div class="row mt-3" style="height: 100vh;overflow-y: scroll;">
+                <div class="row mt-3" style="height: 50vh;overflow-y: scroll;">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Myy Top Blogs</h4>
+                        <h4 class="text-right">My Top Blogs</h4>
                     </div>
                     <div style="text-align: center;border:1px solid black;">
+                        <br>
                         {% for p in post.all %}
                             <h3>{{ p.title }}</h3>
                             <div>{{ p.blogs|safe }}</div>

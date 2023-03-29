@@ -11,6 +11,7 @@
     <meta name="generator" content="Hugo 0.104.2">
 <link rel="stylesheet" href="{% static 'Stock_Game/css/index.css' %}">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/features/">
+      <link rel="stylesheet" type="text/css" href="{% static 'Stock_Game/css/index.css' %}?{% now "U" %}">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -104,13 +105,13 @@
 	to {background-position: 500px 0;}
 }
     </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Carousel Template for Bootstrap</title>
+    <title>Stock Details of {{temp}}</title>
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this tem
+    plate -->
       <style>
           #custom-cards{
           margin-top: 25px;
@@ -243,24 +244,58 @@
           margin-left: 30px;
         }
         </style>
+        <style>
+            .avatar {
+                  vertical-align: middle;
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 50%;
+                }
+        </style>
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
+
+        <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
   </head>
 <body>
+      <div class="loader" style="display: none;">
+          <div class="rotate"></div>
+          <div>
+              <h3 style="color: blue">Just a Moment .... Predicting</h3>
+          </div>
+          <div>
+              <img src="{% static 'Stock_Game/images/load1.gif' %}">
+          </div>
+      </div>
 
-<nav class="navbar navbar-light navPad" style="background-color: #377dc34d">
+    <div class="content">
+    <nav class="navbar navbar-light navPad" style="background-color: #377dc34d">
         <div class="container-fluid">
-            <a href="/" style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue;" class="navbar-brand logoPad hh66Heading" style="width: 148px;height: 40px;">Stock Trainer</a>
-            <span style="font-size:20px;color:white;padding-right: 40px;">Welcome,{{request.user}}</span>
+            <a href="/main" style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px blue;" class="navbar-brand logoPad hh66Heading" style="width: 148px;height: 40px;">Stock Trainer</a>
+            <div style="padding-top: 5px">
+                <img style="margin-right: 5px" src="{% static 'Stock_Game/images/hi5.jpg' %}" alt="Avatar" class="avatar">
+                <a style="font-size:18px; color:white; padding-right:40px; padding-top: 5px; margin-top: 5px">Welcome, {{request.user}}</a>
+                <a href="/user/logout" style="font-size:18px; color:white; padding-right:40px; text-decoration: none;" onclick="logout()">logout</a>
+            </div>
+            <script>
+                    function logout(){
+                    alert('You have logged out successfully')
+                    }
+                </script>
+
+
         </div>
-    </nav>
+        </nav>
+
   <main>
     <div class="container px-0" style="padding-bottom: 20px; " id="custom-cards">
-      <h4 class="pb-3 border-bottom" style="color:white">Welcome, {{request.user}} to the Room {{room_name}}</h4>
+      <h4 class="pb-3 border-bottom" style="color:white;">Welcome, {{request.user}} to the Room {{room_name}}</h4>
     </div>
     <div class="container px-0 py-2" id="custom-cards1">
       <h4 style="color:white">Room Name : {{room_name}}</h4>
     </div>
     <div class="container px-0 py-2" id="custom-cards2">
-        <h4 style="color:white">Stock Name : {{temp}} <span id="ca">{{stock_name}}</span></h4>
+        <h4 style="color:white">Stock Name : {{temp}} (<span id="ca">{{stock_name}}</span>)</h4>
     </div>
     <div class="container px-0 py-2" id="custom-cards3">
       <h4 style="color:white" >Current Stock Price : Rs.<span id="pen">{{current_stock_price}}</span></h4>
@@ -324,9 +359,9 @@ setInterval(function(){
 
                             <input type = 'text' id = "quantity" name = "quantity" style="height: 30px; margin-top: 10px" onkeyup="calc()"></h6>
 
-                            <h6 style="display : inline-block; height: 30px; margin-top: 10px">Total amount to be getting invested : Rs. </h6>
+                            <h6 style="display : inline-block; height: 30px; margin-top: 10px; background-color: transparent; border:none; font-size: 16px">Total amount to be getting invested : Rs. </h6>
 
-                            <span><input type = "text" name = "output" id = "output" value = ""></span>
+                            <span><input type = "text" name = "output" id = "output" value = "" style="background-color: transparent; border:none; font-size: 16px"></span>
 
                              <script>
                                  function calc(){
@@ -541,12 +576,42 @@ function drawCurveTypes() {
       <div class="container px-0 py-2" id="custom-cards6">
       <h4 class="pb-3" style="color:white">User can make use of our trained algorithm for predicting share prices by clicking here ...</h4>
     </div>
-      <span style="text-align: center">
-          <form method="POST" action="{{current_stock_price}}/{{no_of_shares}}/pred/">
-          {% csrf_token %}
-          <div>
-              <button id="myBtn_new2" class="btn btn-primary" style =  "margin-bottom: 5px; height: 50px; width: 380px; background: white; color: black; font-size: 18px; font-weight: bold;">Predict</button>
-          </div>
-         </form>
-      </span>
+<!--      <span style="text-align: center">-->
+<!--          <form method="POST" action="{{current_stock_price}}/{{no_of_shares}}/pred/">-->
+<!--          {% csrf_token %}-->
+<!--          <div>-->
+<!--              <button id="myBtn_new2" class="btn btn-primary" style =  "margin-bottom: 5px; height: 50px; width: 380px; background: white; color: black; font-size: 18px; font-weight: bold;">Predict</button>-->
+<!--          </div>-->
+<!--         </form>-->
+<!--      </span>-->
+      <div style = "text-align: center">
+              <button id="myBtn_new2" class="btn btn-primary" style =  "background-color: white; font-weight: bold; font-size: 18px;
+                    color: black; border: 2px solid white; border-radius: 5px; width: 400px;height: 50px;" onclick="
+              showLoaderOnClick( `{% url 'predict' room_name stock_name current_stock_price no_of_shares %}`)">Predict</button>
+
+      </div>
 </main>
+    </div>
+</body>
+<script>
+  function showLoaderOnClick(url) {
+    console.log(url);
+      showLoader();
+      window.location=url;
+  }
+  function showLoader(){
+      console.log("done")
+      $('.body').css('display','none');
+      $('.content').css('display','none')
+      $('.loader').css('display','block');
+      $(window).on('load', function(){
+        setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+      });
+      function removeLoader(){
+          $( "#loadingDiv" ).fadeOut(500, function() {
+            // fadeOut complete. Remove the loading div
+            $( "#loadingDiv" ).remove(); //makes page more lightweight
+        });
+      }
+  }
+</script>
